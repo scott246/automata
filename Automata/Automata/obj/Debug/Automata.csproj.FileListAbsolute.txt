@@ -1,0 +1,15 @@
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.csprojAssemblyReference.cache
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\MainWindow.g.cs
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\App.g.cs
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata_MarkupCompile.cache
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata_MarkupCompile.lref
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\bin\Debug\Automata.exe.config
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\bin\Debug\Automata.exe
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\bin\Debug\Automata.pdb
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\MainWindow.baml
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.g.resources
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.Properties.Resources.resources
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.csproj.GenerateResource.cache
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.csproj.CoreCompileInputs.cache
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.exe
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.pdb
