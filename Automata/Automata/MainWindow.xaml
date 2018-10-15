@@ -5,17 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Automata"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStartupLocation="CenterScreen" Background="Black" ResizeMode="NoResize">
 	<Grid>
-		<TextBox HorizontalAlignment="Left" Height="23" Margin="290,130,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283"/>
-		<PasswordBox HorizontalAlignment="Left" Margin="290,173,0,0" VerticalAlignment="Top" Width="283" Height="23"/>
-		<Button Content="Register" HorizontalAlignment="Left" Margin="219,226,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.29,-3.067"/>
-		<Button Content="Login" HorizontalAlignment="Left" Margin="498,226,0,0" VerticalAlignment="Top" Width="75"/>
-		<Label Content="Username" HorizontalAlignment="Left" Margin="219,130,0,0" VerticalAlignment="Top"/>
-		<Label Content="Password" HorizontalAlignment="Left" Margin="219,173,0,0" VerticalAlignment="Top"/>
-		<Label Content="Automata" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="219,10,219,0" VerticalAlignment="Top" FontFamily="Denmark" FontSize="72" Width="354"/>
-		<Label Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="299,223,299,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.367" Width="194"/>
-		<Label Content="v1" HorizontalAlignment="Left" Margin="578,32,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.808,-1.198"/>
+		<Rectangle Fill="Red" HorizontalAlignment="Left" Height="401" Stroke="Black" VerticalAlignment="Top" Width="774" Margin="10,10,10,10"/>
+
+		<TextBox x:Name="UsernameText" HorizontalAlignment="Left" Height="23" Margin="480,131,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="283"/>
+		<PasswordBox x:Name="PasswordText" HorizontalAlignment="Left" Margin="480,174,0,0" VerticalAlignment="Top" Width="283" Height="23"/>
+		<Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Left" Margin="409,227,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="-0.29,-3.067"/>
+		<Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="688,227,0,0" VerticalAlignment="Top" Width="75" Click="LoginButtonClick"/>
+		<Label Content="Username" HorizontalAlignment="Left" Margin="409,131,0,0" VerticalAlignment="Top"/>
+		<Label Content="Password" HorizontalAlignment="Left" Margin="409,174,0,0" VerticalAlignment="Top"/>
+		<Label Content="Automata" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="10,145,430,0" VerticalAlignment="Top" FontFamily="OCR A Extended" FontSize="72" Width="354" />
+		<Label x:Name="InfoText" Content="" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="490,224,110,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.367" Width="194"/>
+		<Label Content="0.0.1" HorizontalAlignment="Left" Margin="734,376,0,0" VerticalAlignment="Top" RenderTransformOrigin="10.808,-1.198" Height="35" Width="50"/>
+		<CheckBox x:Name="RememberMeCheckbox" Content="Remember Me" HorizontalAlignment="Left" Margin="665,252,0,0" VerticalAlignment="Top"/>
+		<Label Content="Welcome to Automata!&#xD;&#xA;To login, type username and password.&#xD;&#xA;New users type desired username/password and click Register." HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="10,341,430,0" VerticalAlignment="Top" RenderTransformOrigin="0.495,-0.367" Width="354" Height="70"/>
 
 	</Grid>
 </Window>

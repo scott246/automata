@@ -24,5 +24,12 @@ namespace Automata
 		{
 			InitializeComponent();
 		}
+
+		private void LoginButtonClick(object sender, RoutedEventArgs e)
+		{
+			//code to login
+			//if authenticated
+			//DialogResult = true;
+		}
 	}
 }
