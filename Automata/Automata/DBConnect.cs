@@ -7,21 +7,39 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace Automata
 {
     class DBConnect
     {
-		private MySqlConnection connection;
-		private string server;
-		private string database;
-		private string uid;
-		private string password;
+		private static MySqlConnection connection;
+		private static string server;
+		private static string database;
+		private static string uid;
+		private static string password;
 
 		//Constructor
 		public DBConnect()
 		{
 			Initialize();
+		}
+
+		public static string Test()
+		{
+			string json = string.Empty;
+			string returnme = string.Empty;
+			using (StreamReader r = new StreamReader("../../secrets.json"))
+			{
+				json = r.ReadToEnd();
+				dynamic array = JsonConvert.DeserializeObject(json);
+				server = array.dbserver;
+				database = array.dbname;
+				uid = array.dbun;
+				password = array.dbpw;
+				returnme = uid;
+			}
+			return returnme;
 		}
 
 		//Initialize values

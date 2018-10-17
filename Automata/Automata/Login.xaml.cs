@@ -110,6 +110,8 @@ namespace Automata
 		{
 			string username = UsernameBox.Text;
 			string password = HashAndSalt(PasswordBox.Password);
+			var x = DBConnect.Test();
+			Console.WriteLine(x);
 		}
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
