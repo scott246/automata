@@ -22,6 +22,7 @@ namespace Automata
 	/// </summary>
 	public partial class Login : Window
 	{
+		AutomataSelect as1 = new AutomataSelect();
 		public Login()
 		{
 			InitializeComponent();
@@ -64,14 +65,45 @@ namespace Automata
 				//attempt registration
 				string query = "INSERT INTO users(uname, pw, loggedin, persist) VALUES (\"{0}\", \"{1}\", false, false);";
 				string queryToInsert = string.Format(query, username, password);
-				DBOps.Insert(queryToInsert);
-				ErrorText.Content = "Registration successful! Please login to access application.";
+				ErrorText.Content = "Loading...";
+				var insertResult = DBOps.Insert(queryToInsert);
+				int code = insertResult.First().Key;
+				string message = insertResult.First().Value;
+				if (code == 0)
+				{
+					ErrorText.Content = "Registration successful! Please login to access application.";
+				}
+				else if (code == 1062)
+				{
+					ErrorText.Content = "Username taken.";
+				}
+				else
+				{
+					ErrorText.Content = "Server error. (" + code + ": " + message + ")";
+				}
 			}
 		}
 
 		private void LoginButton_Click(object sender, RoutedEventArgs e)
 		{
+			string username = UsernameBox.Text;
+			string password = HashAndSalt(PasswordBox.Password);
 
+			//attempt login
+			string query = "SELECT * FROM users WHERE uname='{0}' AND pw='{1}';";
+			string queryToSelect = string.Format(query, username, password);
+			ErrorText.Content = "Loading...";
+			var selectResult = DBOps.Select(queryToSelect);
+			if (selectResult.Count > 0)
+			{
+				as1.test.Content = "Hi, " + username;
+				as1.Show();
+				this.Close();
+			}
+			else
+			{
+				ErrorText.Content = "Incorrect username or password."; 
+			}
 		}
 	}
 }

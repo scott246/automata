@@ -136,3 +136,5 @@ C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Microsoft.As
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\MySql.Data.xml
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\Automata.csproj.CopyComplete
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\AutomataSelect.g.cs
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\AutomataSelect.baml

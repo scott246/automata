@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
 
@@ -44,11 +39,6 @@ namespace Automata
 			}
 			catch (MySqlException ex)
 			{
-				//When handling errors, you can your application's response based 
-				//on the error number.
-				//The two most common error numbers when connecting are as follows:
-				//0: Cannot connect to server.
-				//1045: Invalid user name and/or password.
 				switch (ex.Number)
 				{
 					case 0:
@@ -79,22 +69,29 @@ namespace Automata
 		}
 
 		//Insert statement
-		public static void Insert(string query)
+		public static Dictionary<int, string> Insert(string query)
 		{
 			//sample string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
 
-			//open connection
 			if (OpenConnection() == true)
 			{
-				//create command and assign the query and connection from the constructor
 				MySqlCommand cmd = new MySqlCommand(query, connection);
 
-				//Execute command
-				cmd.ExecuteNonQuery();
-
-				//close connection
+				try
+				{
+					cmd.ExecuteNonQuery();
+				}
+				catch (MySqlException e)
+				{
+					Console.WriteLine(e.Number);
+					Console.WriteLine(e.Message);
+					CloseConnection();
+					return new Dictionary<int, string> { { e.Number, e.Message } };
+				}
 				CloseConnection();
+				return new Dictionary<int, string> { { 0, "Success" } };
 			}
+			return new Dictionary<int, string> { { -1, "Couldn't open connection" } };
 		}
 
 		//Update statement
@@ -102,20 +99,12 @@ namespace Automata
 		{
 			//sample string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
-			//Open connection
 			if (OpenConnection() == true)
 			{
-				//create mysql command
 				MySqlCommand cmd = new MySqlCommand();
-				//Assign the query using CommandText
 				cmd.CommandText = query;
-				//Assign the connection using Connection
 				cmd.Connection = connection;
-
-				//Execute query
 				cmd.ExecuteNonQuery();
-
-				//close connection
 				CloseConnection();
 			}
 		}
@@ -138,38 +127,27 @@ namespace Automata
 		{
 			//sample string query = "SELECT * FROM tableinfo";
 
-
-
-			//Create a list to store the result
 			List<dynamic> list = new List<dynamic>();
-
-			//Open connection
 			if (OpenConnection() == true)
 			{
-				//Create Command
 				MySqlCommand cmd = new MySqlCommand(query, connection);
-				//Create a data reader and Execute the command
 				MySqlDataReader dataReader = cmd.ExecuteReader();
-
-				//Read the data and store them in the list
+				int row = 0;
 				while (dataReader.Read())
 				{
-					for (int i = 0; i < dataReader.FieldCount; i++)
+					List<dynamic> innerList = new List<dynamic>();
+					for (int col = 0; col < dataReader.FieldCount; col++)
 					{
-						if (query.Contains(dataReader.GetName(i)))
+						if (query.Contains(dataReader.GetName(col)))
 						{
-							list[i].Add(dataReader.GetValue(i));
+							innerList.Add(dataReader.GetValue(col));
 						}
 					}
+					list.Add(innerList);
+					row++;
 				}
-
-				//close Data Reader
 				dataReader.Close();
-
-				//close Connection
 				CloseConnection();
-
-				//return list to be displayed
 				return list;
 			}
 			else
@@ -182,18 +160,12 @@ namespace Automata
 		public static int Count(string query)
 		{
 			//sample string query = "SELECT Count(*) FROM tableinfo";
-			int count = -1;
 
-			//Open Connection
+			int count = -1;
 			if (OpenConnection() == true)
 			{
-				//Create Mysql Command
 				MySqlCommand cmd = new MySqlCommand(query, connection);
-
-				//ExecuteScalar will return one value
 				count = int.Parse(cmd.ExecuteScalar() + "");
-
-				//close Connection
 				CloseConnection();
 
 				return count;
