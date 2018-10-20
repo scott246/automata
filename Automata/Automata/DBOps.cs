@@ -83,8 +83,6 @@ namespace Automata
 				}
 				catch (MySqlException e)
 				{
-					Console.WriteLine(e.Number);
-					Console.WriteLine(e.Message);
 					CloseConnection();
 					return new Dictionary<int, string> { { e.Number, e.Message } };
 				}
@@ -95,18 +93,28 @@ namespace Automata
 		}
 
 		//Update statement
-		public static void Update(string query)
+		public static Dictionary<int, string> Update(string query)
 		{
 			//sample string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
 			if (OpenConnection() == true)
 			{
-				MySqlCommand cmd = new MySqlCommand();
-				cmd.CommandText = query;
-				cmd.Connection = connection;
-				cmd.ExecuteNonQuery();
-				CloseConnection();
+				try
+				{
+					MySqlCommand cmd = new MySqlCommand();
+					cmd.CommandText = query;
+					cmd.Connection = connection;
+					cmd.ExecuteNonQuery();
+					CloseConnection();
+				}
+				catch (MySqlException e)
+				{
+					CloseConnection();
+					return new Dictionary<int, string> { { e.Number, e.Message } };
+				}
+				return new Dictionary<int, string> { { 0, "Success" } };
 			}
+			return new Dictionary<int, string> { { -1, "Couldn't open connection" } };
 		}
 
 		//Delete statement

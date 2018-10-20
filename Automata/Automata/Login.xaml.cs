@@ -22,10 +22,29 @@ namespace Automata
 	/// </summary>
 	public partial class Login : Window
 	{
-		AutomataSelect as1 = new AutomataSelect();
+		AutomataSelect as1;
 		public Login()
 		{
+			var name = "";
+			if (!(name = CheckLogin()).Equals(""))
+			{
+				as1 = new AutomataSelect(name);
+				as1.Show();
+				Close();
+			}
 			InitializeComponent();
+		}
+
+		public string CheckLogin()
+		{
+			string query = "SELECT uname FROM users WHERE machineName='{0}' AND persist=true;";
+			string queryToSelect = string.Format(query, Environment.MachineName);
+			var data = DBOps.Select(queryToSelect);
+			if (data.Count > 0)
+			{
+				return data[0][0];
+			}
+			return "";
 		}
 
 		private string HashAndSalt(string pw)
@@ -36,12 +55,11 @@ namespace Automata
 			const int numBytesRequested = 256 / 8;
 			var subkey = KeyDerivation.Pbkdf2(pw, salt, prf, iterCount, numBytesRequested);
 			return SecretsManagement.EnterSecretsVault("salt2") + Convert.ToBase64String(subkey);
-
 		}
 
 		public void Show_Help(object sender, RoutedEventArgs e)
 		{
-			ErrorText.Content = "Existing users type username and password and click Login."+Environment.NewLine+"New users type desired username and password and click Register.";
+			ErrorText.Text = "Existing users type username and password and click Login."+Environment.NewLine+"New users type desired username and password and click Register.";
 		}
 
 		private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -50,36 +68,34 @@ namespace Automata
 			string password = HashAndSalt(PasswordBox.Password);
 			if (username.Length == 0)
 			{
-				ErrorText.Content = "Username cannot be blank.";
+				ErrorText.Text = "Username cannot be blank.";
 				UsernameBox.SelectAll();
 				UsernameBox.Focus();
 			}
 			else if (PasswordBox.Password.Length < 8)
 			{
-				ErrorText.Content = "Password must be at least 8 characters.";
+				ErrorText.Text = "Password must be at least 8 characters.";
 				PasswordBox.SelectAll();
 				PasswordBox.Focus();
 			}
 			else
 			{
-				//attempt registration
 				string query = "INSERT INTO users(uname, pw, loggedin, persist) VALUES (\"{0}\", \"{1}\", false, false);";
 				string queryToInsert = string.Format(query, username, password);
-				ErrorText.Content = "Loading...";
 				var insertResult = DBOps.Insert(queryToInsert);
 				int code = insertResult.First().Key;
 				string message = insertResult.First().Value;
 				if (code == 0)
 				{
-					ErrorText.Content = "Registration successful! Please login to access application.";
+					ErrorText.Text = "Registration successful! Please login to access application.";
 				}
 				else if (code == 1062)
 				{
-					ErrorText.Content = "Username taken.";
+					ErrorText.Text = "Username taken.";
 				}
 				else
 				{
-					ErrorText.Content = "Server error. (" + code + ": " + message + ")";
+					ErrorText.Text = "Server error. (" + code + ": " + message + ")";
 				}
 			}
 		}
@@ -88,21 +104,49 @@ namespace Automata
 		{
 			string username = UsernameBox.Text;
 			string password = HashAndSalt(PasswordBox.Password);
+			bool persist = (bool)PersistLoginCheckBox.IsChecked;
 
-			//attempt login
-			string query = "SELECT * FROM users WHERE uname='{0}' AND pw='{1}';";
-			string queryToSelect = string.Format(query, username, password);
-			ErrorText.Content = "Loading...";
-			var selectResult = DBOps.Select(queryToSelect);
-			if (selectResult.Count > 0)
+			string query = "SELECT uid FROM users WHERE uname='{0}' AND pw='{1}';";
+			string query2;
+			if (persist)
 			{
-				as1.test.Content = "Hi, " + username;
-				as1.Show();
-				this.Close();
+				query2 = "UPDATE users SET loggedIn=true, persist=true, machineName='{0}' WHERE uname='{1}';";
 			}
 			else
 			{
-				ErrorText.Content = "Incorrect username or password."; 
+				query2 = "UPDATE users SET loggedIn=true, persist=false, machineName='{0}' WHERE uname='{1}';";
+			}
+			string queryToSelect = string.Format(query, username, password);
+			string queryToUpdate = string.Format(query2, Environment.MachineName, username);
+			var selectResult = DBOps.Select(queryToSelect);
+			if (selectResult.Count > 0)
+			{
+				int uid = Convert.ToInt32(selectResult[0][0]);
+				var code = DBOps.Update(queryToUpdate);
+				if (code.Keys.First() == 0)
+				{
+					string query3 = "INSERT INTO logins (uid, tstamp) VALUES ({0}, '{1}');";
+					string queryToInsert = string.Format(query3, uid, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+					var insertResult = DBOps.Insert(queryToInsert);
+					if (insertResult.First().Key == 0)
+					{
+						as1 = new AutomataSelect(username);
+						as1.Show();
+						Close();
+					}
+					else
+					{
+						ErrorText.Text = "Server error. (" + insertResult.Keys.First() + ": " + insertResult.Values.First() + ")";
+					}
+				}
+				else
+				{
+					ErrorText.Text = "Server error. (" + code.Keys.First() + ": " + code.Values.First() + ")";
+				}
+			}
+			else
+			{
+				ErrorText.Text = "Incorrect username or password."; 
 			}
 		}
 	}

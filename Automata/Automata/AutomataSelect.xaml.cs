@@ -19,9 +19,10 @@ namespace Automata
 	/// </summary>
 	public partial class AutomataSelect : Window
 	{
-		public AutomataSelect()
+		public AutomataSelect(string user)
 		{
 			InitializeComponent();
+			test.Content = "Welcome, " + user;
 		}
 	}
 }
