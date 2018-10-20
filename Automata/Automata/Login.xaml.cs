@@ -33,16 +33,24 @@ namespace Automata
 				Close();
 			}
 			InitializeComponent();
+			UsernameBox.Focus();
+			this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+		}
+
+		private void HandleEsc(object sender, KeyEventArgs e)
+		{
+			if (e.Key == Key.Escape)
+				Close();
 		}
 
 		public string CheckLogin()
 		{
-			string query = "SELECT uname FROM users WHERE machineName='{0}' AND persist=true;";
-			string queryToSelect = string.Format(query, Environment.MachineName);
-			var data = DBOps.Select(queryToSelect);
-			if (data.Count > 0)
+			string persistentUsersQuery = string.Format("SELECT uname FROM users WHERE machineName='{0}' AND persist=true;", 
+				Environment.MachineName);
+			var persistentUsersOnCurrentMachine = DBOps.Select(persistentUsersQuery);
+			if (persistentUsersOnCurrentMachine.Count > 0)
 			{
-				return data[0][0];
+				return persistentUsersOnCurrentMachine[0][0];
 			}
 			return "";
 		}
@@ -80,11 +88,13 @@ namespace Automata
 			}
 			else
 			{
-				string query = "INSERT INTO users(uname, pw, loggedin, persist) VALUES (\"{0}\", \"{1}\", false, false);";
-				string queryToInsert = string.Format(query, username, password);
-				var insertResult = DBOps.Insert(queryToInsert);
-				int code = insertResult.First().Key;
-				string message = insertResult.First().Value;
+				string addUser = string.Format(
+					"INSERT INTO users(uname, pw, persist) VALUES (\"{0}\", \"{1}\", false);", 
+					username, 
+					password);
+				var addUserResult = DBOps.Insert(addUser);
+				int code = addUserResult.First().Key;
+				string message = addUserResult.First().Value;
 				if (code == 0)
 				{
 					ErrorText.Text = "Registration successful! Please login to access application.";
@@ -106,29 +116,32 @@ namespace Automata
 			string password = HashAndSalt(PasswordBox.Password);
 			bool persist = (bool)PersistLoginCheckBox.IsChecked;
 
-			string query = "SELECT uid FROM users WHERE uname='{0}' AND pw='{1}';";
-			string query2;
+			string query;
 			if (persist)
 			{
-				query2 = "UPDATE users SET loggedIn=true, persist=true, machineName='{0}' WHERE uname='{1}';";
+				query = "UPDATE users SET persist=true, machineName='{0}' WHERE uname='{1}';";
 			}
 			else
 			{
-				query2 = "UPDATE users SET loggedIn=true, persist=false, machineName='{0}' WHERE uname='{1}';";
+				query = "UPDATE users SET persist=false, machineName='{0}' WHERE uname='{1}';";
 			}
-			string queryToSelect = string.Format(query, username, password);
-			string queryToUpdate = string.Format(query2, Environment.MachineName, username);
-			var selectResult = DBOps.Select(queryToSelect);
-			if (selectResult.Count > 0)
+			string getUsersWithCreds = string.Format(
+				"SELECT uname FROM users WHERE uname='{0}' AND pw='{1}';", 
+				username, 
+				password);
+			string logInUser = string.Format(query, Environment.MachineName, username);
+			var usersWithCreds = DBOps.Select(getUsersWithCreds);
+			if (usersWithCreds.Count > 0)
 			{
-				int uid = Convert.ToInt32(selectResult[0][0]);
-				var code = DBOps.Update(queryToUpdate);
+				var code = DBOps.Update(logInUser);
 				if (code.Keys.First() == 0)
 				{
-					string query3 = "INSERT INTO logins (uid, tstamp) VALUES ({0}, '{1}');";
-					string queryToInsert = string.Format(query3, uid, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-					var insertResult = DBOps.Insert(queryToInsert);
-					if (insertResult.First().Key == 0)
+					string updateLoginTable = string.Format(
+						"INSERT INTO logins (uname, tstamp) VALUES ('{0}', '{1}');",
+						username, 
+						DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+					var updateLoginsResult = DBOps.Insert(updateLoginTable);
+					if (updateLoginsResult.First().Key == 0)
 					{
 						as1 = new AutomataSelect(username);
 						as1.Show();
@@ -136,7 +149,7 @@ namespace Automata
 					}
 					else
 					{
-						ErrorText.Text = "Server error. (" + insertResult.Keys.First() + ": " + insertResult.Values.First() + ")";
+						ErrorText.Text = "Server error. (" + updateLoginsResult.Keys.First() + ": " + updateLoginsResult.Values.First() + ")";
 					}
 				}
 				else

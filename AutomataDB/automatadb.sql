@@ -1,19 +1,17 @@
 CREATE TABLE IF NOT EXISTS users (
-	uid INT AUTO_INCREMENT,
     uname VARCHAR(30) UNIQUE NOT NULL,
     pw CHAR(64) NOT NULL,
-    loggedin BOOLEAN,
     persist BOOLEAN,
-    PRIMARY KEY (uid)
+    machineName VARCHAR(300),
+    PRIMARY KEY (uname)
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS logins (
-	uid INT,
+	uname VARCHAR(30),
     tstamp DATETIME NOT NULL,
-    success BOOLEAN,
-    PRIMARY KEY (uid, tstamp),
-    FOREIGN KEY (uid)
-		REFERENCES users(uid)
+    PRIMARY KEY (uname, tstamp),
+    FOREIGN KEY (uname)
+		REFERENCES users(uname)
         ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -48,12 +46,12 @@ CREATE TABLE IF NOT EXISTS steps (
 ) ENGINE=InnoDB;
 
 CREATE TABLE IF NOT EXISTS userautomaton (
-	uid INT,
+	uname VARCHAR(30),
     aid INT,
     role TINYINT,
-    PRIMARY KEY (uid, aid),
-    FOREIGN KEY (uid)
-		REFERENCES users(uid)
+    PRIMARY KEY (uname, aid),
+    FOREIGN KEY (uname)
+		REFERENCES users(uname)
         ON DELETE CASCADE,
 	FOREIGN KEY (aid)
 		REFERENCES automata(aid)
