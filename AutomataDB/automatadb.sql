@@ -6,15 +6,6 @@ CREATE TABLE IF NOT EXISTS users (
     PRIMARY KEY (uname)
 ) ENGINE=InnoDB;
 
-CREATE TABLE IF NOT EXISTS logins (
-	uname VARCHAR(30),
-    tstamp DATETIME NOT NULL,
-    PRIMARY KEY (uname, tstamp),
-    FOREIGN KEY (uname)
-		REFERENCES users(uname)
-        ON DELETE CASCADE
-) ENGINE=InnoDB;
-
 CREATE TABLE IF NOT EXISTS automata (
 	aid INT AUTO_INCREMENT,
     atitle VARCHAR(30),

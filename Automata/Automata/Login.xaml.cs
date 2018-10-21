@@ -45,12 +45,13 @@ namespace Automata
 
 		public string CheckLogin()
 		{
-			string persistentUsersQuery = string.Format("SELECT uname FROM users WHERE machineName='{0}' AND persist=true;", 
-				Environment.MachineName);
-			var persistentUsersOnCurrentMachine = DBOps.Select(persistentUsersQuery);
-			if (persistentUsersOnCurrentMachine.Count > 0)
+			var persistentUsers = DBOps.Select(
+				string.Format(
+				"SELECT uname FROM users WHERE machineName='{0}' AND persist=true;",
+				Environment.MachineName));
+			if (persistentUsers != null && persistentUsers.Count > 0)
 			{
-				return persistentUsersOnCurrentMachine[0][0];
+				return persistentUsers[0][0];
 			}
 			return "";
 		}
@@ -74,7 +75,13 @@ namespace Automata
 		{
 			string username = UsernameBox.Text;
 			string password = HashAndSalt(PasswordBox.Password);
-			if (username.Length == 0)
+			if (username.Length == 0 && PasswordBox.Password.Length == 0)
+			{
+				ErrorText.Text = "To register, type a username and password in the boxes above.";
+				UsernameBox.SelectAll();
+				UsernameBox.Focus();
+			}
+			else if (username.Length == 0)
 			{
 				ErrorText.Text = "Username cannot be blank.";
 				UsernameBox.SelectAll();
@@ -88,13 +95,12 @@ namespace Automata
 			}
 			else
 			{
-				string addUser = string.Format(
-					"INSERT INTO users(uname, pw, persist) VALUES (\"{0}\", \"{1}\", false);", 
-					username, 
-					password);
-				var addUserResult = DBOps.Insert(addUser);
-				int code = addUserResult.First().Key;
-				string message = addUserResult.First().Value;
+				var addUserResult = DBOps.Insert(
+					string.Format(
+					"INSERT INTO users(uname, pw, persist) VALUES (\"{0}\", \"{1}\", false);",
+					username,
+					password));
+				int code = addUserResult;
 				if (code == 0)
 				{
 					ErrorText.Text = "Registration successful! Please login to access application.";
@@ -105,7 +111,7 @@ namespace Automata
 				}
 				else
 				{
-					ErrorText.Text = "Server error. (" + code + ": " + message + ")";
+					ErrorText.Text = "Error registering user. (" + code + ")";
 				}
 			}
 		}
@@ -125,36 +131,23 @@ namespace Automata
 			{
 				query = "UPDATE users SET persist=false, machineName='{0}' WHERE uname='{1}';";
 			}
-			string getUsersWithCreds = string.Format(
-				"SELECT uname FROM users WHERE uname='{0}' AND pw='{1}';", 
-				username, 
-				password);
-			string logInUser = string.Format(query, Environment.MachineName, username);
-			var usersWithCreds = DBOps.Select(getUsersWithCreds);
+			var usersWithCreds = DBOps.Select(
+				string.Format(
+				"SELECT uname FROM users WHERE uname='{0}' AND pw='{1}';",
+				username,
+				password));
 			if (usersWithCreds.Count > 0)
 			{
-				var code = DBOps.Update(logInUser);
-				if (code.Keys.First() == 0)
+				int code = DBOps.Update(string.Format(query, Environment.MachineName, username));
+				if (code == 0)
 				{
-					string updateLoginTable = string.Format(
-						"INSERT INTO logins (uname, tstamp) VALUES ('{0}', '{1}');",
-						username, 
-						DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-					var updateLoginsResult = DBOps.Insert(updateLoginTable);
-					if (updateLoginsResult.First().Key == 0)
-					{
-						as1 = new AutomataSelect(username);
-						as1.Show();
-						Close();
-					}
-					else
-					{
-						ErrorText.Text = "Server error. (" + updateLoginsResult.Keys.First() + ": " + updateLoginsResult.Values.First() + ")";
-					}
+					as1 = new AutomataSelect(username);
+					as1.Show();
+					Close();
 				}
 				else
 				{
-					ErrorText.Text = "Server error. (" + code.Keys.First() + ": " + code.Values.First() + ")";
+					ErrorText.Text = "Error logging in. (" + code + ")";
 				}
 			}
 			else

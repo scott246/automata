@@ -1,54 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
 
 namespace Automata
 {
-    class DBOps
+    public class DBOps
     {
 		private static MySqlConnection connection;
-
+		private static bool initialized = false;
 		//Constructor
 		public DBOps()
 		{
-			Initialize();
+			if (!initialized)
+				Initialize();
 		}
 
 		//Initialize values
 		private static void Initialize()
 		{
 			string connectionString;
-			connectionString = "SERVER=" + SecretsManagement.EnterSecretsVault("dbserver") + ";" 
-				+ "DATABASE=" + SecretsManagement.EnterSecretsVault("dbname") + ";" 
-				+ "UID=" + SecretsManagement.EnterSecretsVault("dbun") + ";" 
+			connectionString = "SERVER=" + SecretsManagement.EnterSecretsVault("dbserver") + ";"
+				+ "DATABASE=" + SecretsManagement.EnterSecretsVault("dbname") + ";"
+				+ "UID=" + SecretsManagement.EnterSecretsVault("dbun") + ";"
 				+ "PASSWORD=" + SecretsManagement.EnterSecretsVault("dbpw") + ";"
 				+ "SslMode=none;";
 
 			connection = new MySqlConnection(connectionString);
+			initialized = true;
 		}
 
 		//open connection to database
 		private static bool OpenConnection()
 		{
-			Initialize();
 			try
 			{
-				connection.Open();
+				if (!initialized)
+					Initialize();
+				if (connection != null && connection.State == ConnectionState.Closed)
+					connection.Open();
 				return true;
 			}
-			catch (MySqlException ex)
+			catch (MySqlException)
 			{
-				switch (ex.Number)
-				{
-					case 0:
-						MessageBox.Show("Cannot connect to server. Contact administrator");
-						break;
-
-					case 1045:
-						MessageBox.Show("Invalid username/password, please try again");
-						break;
-				}
 				return false;
 			}
 		}
@@ -58,18 +53,18 @@ namespace Automata
 		{
 			try
 			{
-				connection.Close();
+				if (connection != null && connection.State == ConnectionState.Open)
+					connection.Close();
 				return true;
 			}
-			catch (MySqlException ex)
+			catch (MySqlException)
 			{
-				MessageBox.Show(ex.Message);
 				return false;
 			}
 		}
 
 		//Insert statement
-		public static Dictionary<int, string> Insert(string query)
+		public static int Insert(string query)
 		{
 			//sample string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
 
@@ -84,16 +79,16 @@ namespace Automata
 				catch (MySqlException e)
 				{
 					CloseConnection();
-					return new Dictionary<int, string> { { e.Number, e.Message } };
+					return e.Number;
 				}
 				CloseConnection();
-				return new Dictionary<int, string> { { 0, "Success" } };
+				return 0;
 			}
-			return new Dictionary<int, string> { { -1, "Couldn't open connection" } };
+			return -1;
 		}
-
+		
 		//Update statement
-		public static Dictionary<int, string> Update(string query)
+		public static int Update(string query)
 		{
 			//sample string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
@@ -101,33 +96,45 @@ namespace Automata
 			{
 				try
 				{
-					MySqlCommand cmd = new MySqlCommand();
-					cmd.CommandText = query;
-					cmd.Connection = connection;
+					MySqlCommand cmd = new MySqlCommand
+					{
+						CommandText = query,
+						Connection = connection
+					};
 					cmd.ExecuteNonQuery();
 					CloseConnection();
 				}
 				catch (MySqlException e)
 				{
 					CloseConnection();
-					return new Dictionary<int, string> { { e.Number, e.Message } };
+					return e.Number;
 				}
-				return new Dictionary<int, string> { { 0, "Success" } };
+				return 0;
 			}
-			return new Dictionary<int, string> { { -1, "Couldn't open connection" } };
+			return -1;
 		}
 
 		//Delete statement
-		public static void Delete(string query)
+		public static int Delete(string query)
 		{
 			//sample string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
 			if (OpenConnection() == true)
 			{
-				MySqlCommand cmd = new MySqlCommand(query, connection);
-				cmd.ExecuteNonQuery();
-				CloseConnection();
+				try
+				{
+					MySqlCommand cmd = new MySqlCommand(query, connection);
+					cmd.ExecuteNonQuery();
+					CloseConnection();
+				}
+				catch (MySqlException e)
+				{
+					CloseConnection();
+					return e.Number;
+				}
+				return 0;
 			}
+			return -1;
 		}
 
 		//Select statement

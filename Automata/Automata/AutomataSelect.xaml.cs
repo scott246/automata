@@ -19,10 +19,29 @@ namespace Automata
 	/// </summary>
 	public partial class AutomataSelect : Window
 	{
+		string username = "";
 		public AutomataSelect(string user)
 		{
 			InitializeComponent();
 			test.Content = "Welcome, " + user;
+			username = user;
+		}
+
+		private void Logout(object sender, RoutedEventArgs e)
+		{
+			int code = DBOps.Update(
+				string.Format(
+				"UPDATE users SET persist=false WHERE uname='{0}';",
+				username));
+			if (code == 0)
+			{
+				new Login().Show();
+				Close();
+			}
+			else
+			{
+				Console.WriteLine("Error logging out. (" + code + ")");
+			}
 		}
 	}
 }
