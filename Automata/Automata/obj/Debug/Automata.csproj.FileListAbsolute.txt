@@ -138,3 +138,15 @@ C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\Automata.csp
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\Automata.csproj.CopyComplete
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\Automata.exe
 C:\Users\ndsco\Coding Projects\automata\Automata\Automata\obj\Debug\Automata.pdb
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\ControlzEx.dll
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Fluent.dll
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\System.Windows.Interactivity.dll
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\ControlzEx.pdb
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Fluent.pdb
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Fluent.xml
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Microsoft.Windows.Shell.dll
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\RibbonControlsLibrary.dll
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Microsoft.Windows.Shell.pdb
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\Microsoft.Windows.Shell.xml
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\RibbonControlsLibrary.pdb
+C:\Users\ndsco\Coding Projects\automata\Automata\Automata\bin\Debug\RibbonControlsLibrary.xml

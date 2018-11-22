@@ -43,5 +43,10 @@ namespace Automata
 				Console.WriteLine("Error logging out. (" + code + ")");
 			}
 		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			Automata.Actions.FileCreate.CreateFile(@"C:\Users\ndsco\Test Folder\TestFile.txt");
+		}
 	}
 }
