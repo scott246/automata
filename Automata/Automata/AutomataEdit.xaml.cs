@@ -34,5 +34,20 @@ namespace Automata
 			new AutomataSelect(username).Show();
 			Close();
 		}
+
+		int maxLC = 1;
+		private void Script_textbox_KeyUp(object sender, KeyEventArgs e)
+		{
+			int linecount = script_textbox.GetLastVisibleLineIndex() + 1;
+			if (linecount != maxLC)
+			{
+				line_number_textbox.Clear();
+				for (int i = 1; i < linecount + 1; i++)
+				{
+					line_number_textbox.AppendText(Convert.ToString(i) + "\n");
+				}
+				maxLC = linecount;
+			}
+		}
 	}
 }
