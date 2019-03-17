@@ -10,6 +10,8 @@ namespace Automata.Actions
 	{
 		public static void CreateFile(string path)
 		{
+
+			//TODO: make sure that the folder structure exists
 			try
 			{
 				if (System.IO.Path.HasExtension(path))

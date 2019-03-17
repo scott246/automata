@@ -23,7 +23,7 @@ namespace Automata
 		public AutomataSelect(string user)
 		{
 			InitializeComponent();
-			test.Content = "Welcome, " + user;
+			test.Content = user;
 			username = user;
 		}
 
@@ -46,7 +46,8 @@ namespace Automata
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			Automata.Actions.FileCreate.CreateFile(@"C:\Users\ndsco\Test Folder\TestFile.txt");
+			new AutomataEdit(username, "test project title").Show();
+			Close();
 		}
 	}
 }

@@ -6,20 +6,30 @@
         xmlns:local="clr-namespace:Automata"
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="Automata.AutomataSelect"
         mc:Ignorable="d"
+		Background="#333333"
         Title="Automata Select" Height="450" Width="800" WindowStartupLocation="CenterScreen">
-	<Grid>
+	<Grid Margin="10,10,10,10">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="11*"/>
+		</Grid.RowDefinitions>
 
-		<Label x:Name="test" Content="Get username failed." HorizontalAlignment="Left" Margin="329,193,0,0" VerticalAlignment="Top"/>
-		<Menu HorizontalAlignment="Left" VerticalAlignment="Top" Width="793">
-			<MenuItem Header="_File">
-				<MenuItem Header="_New" HorizontalAlignment="Left"/>
-				<MenuItem Header="_Open" HorizontalAlignment="Left"/>
-				<Separator/>
-				<MenuItem Header="_Logout" HorizontalAlignment="Left"/>
-			</MenuItem>
-		</Menu>
-		<Button x:Name="LogoutButton" Content="Logout" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Click="Logout" Margin="353,220,0,0"/>
-		<Button Content="Button" HorizontalAlignment="Left" Margin="136,297,0,0" VerticalAlignment="Top" Width="74" Click="Button_Click"/>
+		<DataGrid x:Name="AutomataGrid" Background="#666666" Grid.Row="1" VerticalAlignment="Top"/>
+
+		<Grid Grid.Row="0" VerticalAlignment="Top" Height="30">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="75"/>
+				<ColumnDefinition Width="75"/>
+				<ColumnDefinition Width="75"/>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="75"/>
+			</Grid.ColumnDefinitions>
+			<Button Content="New" Click="Button_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Button Content="Open" Click="Button_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Button Content="Delete" Click="Button_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Label x:Name="test" Content="Get username failed."  Grid.Column="3" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Button x:Name="LogoutButton" Content="Logout" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Logout"/>
+		</Grid>
 
 	</Grid>
 </Window>

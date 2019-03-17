@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Automata"
         mc:Ignorable="d"
+		Background="#333333"
         Title="Login" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -17,12 +18,12 @@
 			<RowDefinition Height="*" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
-		<Image Source="Image1.png" Stretch="Fill" Grid.Column="1" Margin="0,0,0,130" Grid.RowSpan="2"/>
-		<Label Content="0.0.1" HorizontalAlignment="Left" Margin="92,92,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50" RenderTransformOrigin="0.441,0.38" Foreground="#999999" FontFamily="Michroma"/>
-		<Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="141" Grid.Row="1" VerticalAlignment="Top" Width="397" Fill="#999999"/>
-		<Label Content="Username" HorizontalAlignment="Left" Margin="25,15,0,0" VerticalAlignment="Top" Width="62" Grid.Column="1" Grid.Row="1"/>
+		<Image Source="Image2.png" Stretch="Fill" Grid.Column="1" Grid.Row="0" Margin="0,34,0,0"/>
+		<Label Content="0.0.1" HorizontalAlignment="Left" Margin="80,104,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="50" RenderTransformOrigin="0.441,0.38" Foreground="#999999" FontFamily="Michroma"/>
+		<Rectangle Grid.Column="1" HorizontalAlignment="Left" Height="141" Grid.Row="1" VerticalAlignment="Top" Width="397" Fill="#666666"/>
+		<Label Content="Username" HorizontalAlignment="Left" Margin="20,15,0,0" VerticalAlignment="Top" Width="67" Grid.Column="1" Grid.Row="1"/>
 		<TextBox x:Name="UsernameBox" HorizontalAlignment="Left" Height="23" Margin="92,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290" Grid.Column="1" Grid.Row="1" Cursor=""/>
-		<Label Content="Password" HorizontalAlignment="Left" Margin="25,47,0,0" VerticalAlignment="Top" Width="62" Grid.Row="1" Grid.Column="1"/>
+		<Label Content="Password" HorizontalAlignment="Left" Margin="20,47,0,0" VerticalAlignment="Top" Width="67" Grid.Row="1" Grid.Column="1"/>
 		<PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="290" Grid.Column="1" Grid.Row="1"/>
 		<Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="307,111,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="1" Click="LoginButton_Click" IsDefault="True"/>
 		<Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Left" Margin="227,111,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="1" Click="RegisterButton_Click"/>
