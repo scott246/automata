@@ -106,10 +106,17 @@
     <Compile Include="AutomataEdit.xaml.cs">
       <DependentUpon>AutomataEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AutomataHelp.xaml.cs">
+      <DependentUpon>AutomataHelp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AutomataSelect.xaml.cs">
       <DependentUpon>AutomataSelect.xaml</DependentUpon>
     </Compile>
     <Page Include="AutomataEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AutomataHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

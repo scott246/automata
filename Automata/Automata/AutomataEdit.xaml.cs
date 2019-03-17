@@ -49,5 +49,10 @@ namespace Automata
 				maxLC = linecount;
 			}
 		}
+
+		private void Help_Clicked(object sender, RoutedEventArgs e)
+		{
+			new AutomataHelp().Show();
+		}
 	}
 }

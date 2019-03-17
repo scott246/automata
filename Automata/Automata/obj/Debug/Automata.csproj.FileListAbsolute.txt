@@ -264,3 +264,5 @@ C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Aut
 C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.csproj.CopyComplete
 C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.exe
 C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\Automata.pdb
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\AutomataHelp.g.cs
+C:\Users\ndsco\Coding Projects\automata\automata\Automata\Automata\obj\Debug\AutomataHelp.baml
