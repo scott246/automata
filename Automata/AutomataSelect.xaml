@@ -14,10 +14,11 @@
 			<RowDefinition Height="11*"/>
 		</Grid.RowDefinitions>
 
-		<DataGrid x:Name="AutomataGrid" Background="#666666" Grid.Row="1" VerticalAlignment="Top"/>
+		<DataGrid x:Name="AutomataGrid" Background="#666666" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
 		<Grid Grid.Row="0" VerticalAlignment="Top" Height="30">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="75"/>
 				<ColumnDefinition Width="75"/>
 				<ColumnDefinition Width="75"/>
 				<ColumnDefinition Width="75"/>
@@ -27,8 +28,9 @@
 			<Button Content="New" Click="Button_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
 			<Button Content="Open" Click="Button_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
 			<Button Content="Delete" Click="Button_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Label x:Name="test" Content="Get username failed."  Grid.Column="3" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
-			<Button x:Name="LogoutButton" Content="Logout" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Logout"/>
+			<Button Content="Toggle" Click="Button_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Label x:Name="test" Content="Get username failed."  Grid.Column="4" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Button x:Name="LogoutButton" Content="Logout" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Logout"/>
 		</Grid>
 
 	</Grid>
