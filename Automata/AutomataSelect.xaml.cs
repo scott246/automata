@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Forms;
 
 namespace Automata
 {
@@ -40,7 +41,11 @@ namespace Automata
 				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled) VALUES (\"{0}\", \"{1}\", true);", 
 				newAutomataName, 
 				newAutomataDesc));
-			Console.WriteLine(result);
+			if (result != 0)
+			{
+				System.Windows.Forms.MessageBox.Show("Error creating automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				Close();
+			}
 			new AutomataEdit(username, newAutomataName).Show();
 			Close();
 		}
