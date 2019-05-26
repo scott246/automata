@@ -13,8 +13,8 @@ namespace Automata.Actions
 		public static void Mail(string subject, dynamic body)
 		{
 			MailMessage message = new MailMessage();
-			message.To.Add(Automata.SecretsManagement.EnterSecretsVault("mailto"));
-			message.From = new MailAddress(Automata.SecretsManagement.EnterSecretsVault("mailfrom"));
+			message.To.Add(Automata.DBOps.GetSecret("mailto"));
+			message.From = new MailAddress(Automata.DBOps.GetSecret("mailfrom"));
 			message.Subject = subject;
 			message.Body = body;
 			SmtpClient smtp = new SmtpClient("smtp.gmail.com")
@@ -22,7 +22,7 @@ namespace Automata.Actions
 				EnableSsl = true,
 				Port = 587,
 				DeliveryMethod = SmtpDeliveryMethod.Network,
-				Credentials = new NetworkCredential(Automata.SecretsManagement.EnterSecretsVault("mailfrom"), Automata.SecretsManagement.EnterSecretsVault("apppw"))
+				Credentials = new NetworkCredential(Automata.DBOps.GetSecret("mailfrom"), Automata.DBOps.GetSecret("apppw"))
 			};
 			try
 			{

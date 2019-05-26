@@ -1,32 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Windows;
+using Newtonsoft.Json;
+using System.IO;
 using MySql.Data.MySqlClient;
 
 namespace Automata
 {
-    public class DBOps
-    {
+	public class DBOps
+	{
 		private static MySqlConnection connection;
 		private static bool initialized = false;
-		//Constructor
-		public DBOps()
+
+		public static dynamic GetSecret(string s)
 		{
-			if (!initialized)
-				Initialize();
+			string json = string.Empty;
+			using (StreamReader r = new StreamReader("../../secrets.json"))
+			{
+				json = r.ReadToEnd();
+			}
+			return JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(json)[s];
 		}
 
 		//Initialize values
 		private static void Initialize()
 		{
 			string connectionString;
-			connectionString = "SERVER=" + SecretsManagement.EnterSecretsVault("dbserver") + ";"
-				+ "DATABASE=" + SecretsManagement.EnterSecretsVault("dbname") + ";"
-				+ "UID=" + SecretsManagement.EnterSecretsVault("dbun") + ";"
-				+ "PASSWORD=" + SecretsManagement.EnterSecretsVault("dbpw") + ";"
+			connectionString = "SERVER=" + GetSecret("dbserver") + ";"
+				+ "DATABASE=" + GetSecret("dbname") + ";"
+				+ "UID=" + GetSecret("dbun") + ";"
+				+ "PASSWORD=" + GetSecret("dbpw") + ";"
 				+ "SslMode=none;";
-
 			connection = new MySqlConnection(connectionString);
 			initialized = true;
 		}
@@ -86,7 +89,7 @@ namespace Automata
 			}
 			return -1;
 		}
-		
+
 		//Update statement
 		public static int Update(string query)
 		{

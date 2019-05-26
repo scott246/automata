@@ -27,8 +27,7 @@
 		<PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="290" Grid.Column="1" Grid.Row="1"/>
 		<Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Left" Margin="307,111,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="1" Click="LoginButton_Click" IsDefault="True"/>
 		<Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Left" Margin="227,111,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1" Grid.Row="1" Click="RegisterButton_Click"/>
-		<TextBlock x:Name="ErrorText" TextWrapping="WrapWithOverflow" Text="" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="120" Width="397" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"/>
+		<TextBlock x:Name="ErrorText" TextWrapping="WrapWithOverflow" Text="" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="#FFFFFF" Height="120" Width="397" Grid.Column="1" Grid.Row="2" Margin="0,10,0,0"/>
 		<Button x:Name="HelpButton" Content="Help" Grid.Column="1" HorizontalAlignment="Left" Margin="92,111,0,0" Grid.Row="1" VerticalAlignment="Top" Width="75" Click="Show_Help"/>
-		<CheckBox x:Name="PersistLoginCheckBox" Content="Remember Me" Grid.Column="1" HorizontalAlignment="Left" Margin="284,78,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 	</Grid>
 </Window>
