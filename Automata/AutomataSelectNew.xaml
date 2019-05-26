@@ -1,0 +1,17 @@
+﻿<Window x:Class="Automata.AutomataSelectNew"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Automata"
+        mc:Ignorable="d"
+		Background="#666666"
+        Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="150" Width="400">
+    <Grid>
+		<Label Content="Name" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Width="70" Foreground="#FFFFFF"/>
+		<TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="92,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"/>
+		<Label Content="Description" HorizontalAlignment="Left" Margin="5,47,0,0" VerticalAlignment="Top" Width="70" Foreground="#FFFFFF"/>
+		<TextBox x:Name="DescriptionBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="290"/>
+		<Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="307,90,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click"  IsDefault="True"/>
+	</Grid>
+</Window>

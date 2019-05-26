@@ -25,12 +25,12 @@
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="75"/>
 			</Grid.ColumnDefinitions>
-			<Button Content="New" Click="Button_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Button Content="Open" Click="Button_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Button Content="Delete" Click="Button_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Button Content="Toggle" Click="Button_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Label x:Name="test" Content="Get username failed."  Grid.Column="4" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
-			<Button x:Name="LogoutButton" Content="Logout" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="Logout"/>
+			<Button x:Name="NewButton" Content="New" Click="NewButton_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Margin="0,0,0,5"/>
+			<Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Button x:Name="DeleteButton" Content="Delete" Click="DeleteButton_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Button x:Name="ToggleButton" Content="Toggle" Click="ToggleButton_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="4" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Button x:Name="LogoutButton" Content="Logout" Click="LogoutButton_Click" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
 		</Grid>
 
 	</Grid>
