@@ -19,26 +19,17 @@ namespace Automata
 	/// </summary>
 	public partial class AutomataSelectNew : Window
 	{
+		public string automataName = "";
+		public string automataDesc = "";
 		public AutomataSelectNew()
 		{
 			InitializeComponent();
 		}
 
-		public string GetValues(string value)
-		{
-			switch (value)
-			{
-				case "name":
-					return NameBox.Text;
-				case "desc":
-					return DescriptionBox.Text;
-				default:
-					return "";
-			}
-		}
-
 		private void Create_Click(object sender, RoutedEventArgs e)
 		{
+			automataName = NameBox.Text;
+			automataDesc = DescriptionBox.Text;
 			Close();
 		}
 	}

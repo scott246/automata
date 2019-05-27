@@ -1,9 +1,15 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Forms;
 
 namespace Automata
 {
+	public class AutomataData
+	{
+		public bool Enabled { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+	}
 	/// <summary>
 	/// Interaction logic for Window1.xaml
 	/// </summary>
@@ -15,6 +21,7 @@ namespace Automata
 			InitializeComponent();
 			UsernameDisplay.Content = user;
 			username = user;
+			PopulateDataGrid();
 		}
 
 		//TODO: delete below constructor and change App.xaml to redirect to login screen
@@ -23,6 +30,27 @@ namespace Automata
 			InitializeComponent();
 			UsernameDisplay.Content = "test1";
 			username = "test1";
+			PopulateDataGrid();
+		}
+
+		private void PopulateDataGrid()
+		{
+			var automataList = DBOps.Select("SELECT automata_name, automata_desc, enabled FROM automata;");
+			if (automataList == null)
+			{
+				System.Windows.Forms.MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+			List<AutomataData> automata = new List<AutomataData>();
+			for (var i = 0; i < automataList.Count; i++)
+			{
+				automata.Add(new AutomataData()
+				{
+					Enabled = automataList[i][2],
+					Name = automataList[i][0],
+					Description = automataList[i][1],
+				});
+			}
+			AutomataGrid.ItemsSource = automata;
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,8 +63,8 @@ namespace Automata
 		{
 			AutomataSelectNew asn = new AutomataSelectNew();
 			asn.ShowDialog();
-			string newAutomataName = asn.GetValues("name");
-			string newAutomataDesc = asn.GetValues("desc");
+			string newAutomataName = asn.automataName;
+			string newAutomataDesc = asn.automataDesc;
 			var result = DBOps.Insert(
 				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled) VALUES (\"{0}\", \"{1}\", true);", 
 				newAutomataName, 

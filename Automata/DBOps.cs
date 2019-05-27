@@ -150,19 +150,17 @@ namespace Automata
 			{
 				MySqlCommand cmd = new MySqlCommand(query, connection);
 				MySqlDataReader dataReader = cmd.ExecuteReader();
-				int row = 0;
 				while (dataReader.Read())
 				{
 					List<dynamic> innerList = new List<dynamic>();
 					for (int col = 0; col < dataReader.FieldCount; col++)
 					{
-						if (query.Contains(dataReader.GetName(col)))
+						if (dataReader.GetName(col).Length > 0)
 						{
 							innerList.Add(dataReader.GetValue(col));
 						}
 					}
 					list.Add(innerList);
-					row++;
 				}
 				dataReader.Close();
 				CloseConnection();
