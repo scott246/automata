@@ -28,6 +28,7 @@ namespace Automata
 
 		private void Create_Click(object sender, RoutedEventArgs e)
 		{
+			//TODO: name error checking - no duplicates, not blank
 			automataName = NameBox.Text;
 			automataDesc = DescriptionBox.Text;
 			Close();

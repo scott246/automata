@@ -1,6 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using CheckBox = System.Windows.Controls.CheckBox;
+using DataGridCell = System.Windows.Controls.DataGridCell;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata
 {
@@ -52,6 +58,31 @@ namespace Automata
 			}
 			AutomataGrid.ItemsSource = automata;
 		}
+		void OnRowSelect(object sender, RoutedEventArgs e)
+		{
+			//TODO: get this to not fire 3 times
+			//get row index
+			DataGridRow r = DataGridRow.GetRowContainingElement((DataGridCell)sender);
+			int rowindex = r.GetIndex();
+
+			//change checkbox enabled status
+			CheckBox c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[rowindex]) as CheckBox;
+			c.IsChecked = !c.IsChecked;
+
+			//get name of changed status' automata
+			Console.WriteLine(AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]));
+			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
+
+			//update DB
+			var result = DBOps.Update(string.Format("UPDATE automata SET enabled={0} WHERE automata_name='{1}';", c.IsChecked, t.Text));
+			if (result != 0)
+			{
+				System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
+
+			//TODO: find a way to unselect row after checking box
+			//AutomataGrid.UnselectAll();
+		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
@@ -71,8 +102,7 @@ namespace Automata
 				newAutomataDesc));
 			if (result != 0)
 			{
-				System.Windows.Forms.MessageBox.Show("Error creating automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				Close();
+				System.Windows.Forms.MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			new AutomataEdit(username, newAutomataName).Show();
 			Close();

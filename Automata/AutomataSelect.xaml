@@ -22,6 +22,7 @@
 			<Setter Property="Background" Value="#666666"/>
 		</Style>
 		<Style x:Key="DGCStyle" TargetType="DataGridCell">
+			<EventSetter Event="Selected" Handler="OnRowSelect"/>
 			<Setter Property="Height" Value="30"/>
 			<Setter Property="BorderBrush" Value="#333333"/>
 		</Style>
@@ -34,9 +35,9 @@
 		<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF"
 				  Grid.Row="1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" 
 				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False"
-				  MaxHeight="358" Width="774" CanUserAddRows="False">
+				  MaxHeight="358" Width="774" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single">
 			<DataGrid.Columns>
-				<DataGridCheckBoxColumn Header="Enabled" Width="50" Binding="{Binding Enabled}" />
+				<DataGridCheckBoxColumn Header="Enabled" Width="50" Binding="{Binding Enabled}"/>
 				<DataGridTextColumn Header="Name" Width="220" Binding="{Binding Name}" />
 				<DataGridTextColumn Header="Description" Width="500" Binding="{Binding Description}" />
 			</DataGrid.Columns>
