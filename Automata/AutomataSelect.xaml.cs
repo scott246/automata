@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using CheckBox = System.Windows.Controls.CheckBox;
-using DataGridCell = System.Windows.Controls.DataGridCell;
-using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata
 {
@@ -22,7 +19,7 @@ namespace Automata
 	public partial class AutomataSelect : Window
 	{
 		readonly string username = "";
-		List<AutomataData> automataList = new List<AutomataData>();
+		readonly List<AutomataData> automataList = new List<AutomataData>();
 		public AutomataSelect(string user)
 		{
 			InitializeComponent();
@@ -63,7 +60,6 @@ namespace Automata
 		{
 			Console.WriteLine("row selected");
 			//get row index
-			//DataGridRow r = DataGridRow.GetRowContainingElement((DataGridCell)sender);
 			DataGridRow r = (DataGridRow)sender;
 			int rowindex = r.GetIndex();
 
@@ -85,8 +81,10 @@ namespace Automata
 				System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 
-			//TODO: find a way to unselect row after checking box
-			//AutomataGrid.UnselectAll();
+			Dispatcher.BeginInvoke(new Action(() =>
+			{
+				AutomataGrid.UnselectAll();
+			}));
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
