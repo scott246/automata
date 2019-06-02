@@ -58,19 +58,24 @@ namespace Automata
 			}
 			AutomataGrid.ItemsSource = automataList;
 		}
-		//TODO: get this to not fire 3 times
+
 		void OnRowSelect(object sender, RoutedEventArgs e)
 		{
+			Console.WriteLine("row selected");
 			//get row index
-			DataGridRow r = DataGridRow.GetRowContainingElement((DataGridCell)sender);
+			//DataGridRow r = DataGridRow.GetRowContainingElement((DataGridCell)sender);
+			DataGridRow r = (DataGridRow)sender;
 			int rowindex = r.GetIndex();
 
 			//change checkbox enabled status
 			CheckBox c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[rowindex]) as CheckBox;
 			c.IsChecked = !c.IsChecked;
 
+			//ensure text boxes cannot be changed
+			AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
+			AutomataGrid.Columns[2].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
+
 			//get name of changed status' automata
-			Console.WriteLine(AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]));
 			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
 
 			//update DB
