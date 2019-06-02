@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Automata"
         mc:Ignorable="d"
-		Background="#666666"
+		Background="#666666" 
         Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="150" Width="400">
     <Grid>
 		<Label Content="Name" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Width="70" Foreground="#FFFFFF"/>

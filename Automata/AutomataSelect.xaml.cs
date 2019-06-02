@@ -22,6 +22,7 @@ namespace Automata
 	public partial class AutomataSelect : Window
 	{
 		readonly string username = "";
+		List<AutomataData> automataList = new List<AutomataData>();
 		public AutomataSelect(string user)
 		{
 			InitializeComponent();
@@ -41,26 +42,25 @@ namespace Automata
 
 		private void PopulateDataGrid()
 		{
-			var automataList = DBOps.Select("SELECT automata_name, automata_desc, enabled FROM automata;");
-			if (automataList == null)
+			var automata = DBOps.Select("SELECT automata_name, automata_desc, enabled FROM automata;");
+			if (automata == null)
 			{
 				System.Windows.Forms.MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
-			List<AutomataData> automata = new List<AutomataData>();
-			for (var i = 0; i < automataList.Count; i++)
+			for (var i = 0; i < automata.Count; i++)
 			{
-				automata.Add(new AutomataData()
+				automataList.Add(new AutomataData()
 				{
-					Enabled = automataList[i][2],
-					Name = automataList[i][0],
-					Description = automataList[i][1],
+					Enabled = automata[i][2],
+					Name = automata[i][0],
+					Description = automata[i][1],
 				});
 			}
-			AutomataGrid.ItemsSource = automata;
+			AutomataGrid.ItemsSource = automataList;
 		}
+		//TODO: get this to not fire 3 times
 		void OnRowSelect(object sender, RoutedEventArgs e)
 		{
-			//TODO: get this to not fire 3 times
 			//get row index
 			DataGridRow r = DataGridRow.GetRowContainingElement((DataGridCell)sender);
 			int rowindex = r.GetIndex();
@@ -92,20 +92,29 @@ namespace Automata
 
 		private void NewButton_Click(object sender, RoutedEventArgs e)
 		{
-			AutomataSelectNew asn = new AutomataSelectNew();
+			List<string> existingAutomataNames = new List<string>();
+			foreach (AutomataData ad in automataList)
+			{
+				existingAutomataNames.Add(ad.Name);
+			}
+			AutomataSelectNew asn = new AutomataSelectNew(existingAutomataNames.ToArray());
 			asn.ShowDialog();
 			string newAutomataName = asn.automataName;
 			string newAutomataDesc = asn.automataDesc;
-			var result = DBOps.Insert(
-				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled) VALUES (\"{0}\", \"{1}\", true);", 
-				newAutomataName, 
-				newAutomataDesc));
-			if (result != 0)
+			if (newAutomataName != "")
 			{
-				System.Windows.Forms.MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//TODO: fix autoincrement to use all numbers before using a new one
+				var result = DBOps.Insert(
+				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled) VALUES (\"{0}\", \"{1}\", true);",
+				newAutomataName,
+				newAutomataDesc));
+				if (result != 0)
+				{
+					System.Windows.Forms.MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				new AutomataEdit(username, newAutomataName).Show();
+				Close();
 			}
-			new AutomataEdit(username, newAutomataName).Show();
-			Close();
 		}
 
 		private void OpenButton_Click(object sender, RoutedEventArgs e)
