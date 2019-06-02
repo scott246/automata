@@ -15,13 +15,13 @@ namespace Automata.Actions
 			MailMessage message = new MailMessage();
 			if (!mms)
 			{
-				message.To.Add(Automata.DBOps.GetSecret("smsto"));
+				message.To.Add(Automata.Operations.GetSecret("smsto"));
 			}
 			else
 			{
-				message.To.Add(Automata.DBOps.GetSecret("mmsto"));
+				message.To.Add(Automata.Operations.GetSecret("mmsto"));
 			}
-			message.From = new MailAddress(Automata.DBOps.GetSecret("mailfrom"));
+			message.From = new MailAddress(Automata.Operations.GetSecret("mailfrom"));
 			message.Subject = subject;
 			message.Body = body;
 			SmtpClient smtp = new SmtpClient("smtp.gmail.com")
@@ -29,7 +29,7 @@ namespace Automata.Actions
 				EnableSsl = true,
 				Port = 587,
 				DeliveryMethod = SmtpDeliveryMethod.Network,
-				Credentials = new NetworkCredential(Automata.DBOps.GetSecret("mailfrom"), Automata.DBOps.GetSecret("apppw"))
+				Credentials = new NetworkCredential(Automata.Operations.GetSecret("mailfrom"), Automata.Operations.GetSecret("apppw"))
 			};
 			try
 			{

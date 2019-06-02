@@ -21,7 +21,7 @@
 		</Style>
 		<Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
 			<Setter Property="Height" Value="30"/>
-			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="HorizontalContentAlignment" Value="Left"/>
 			<Setter Property="Foreground" Value="Orange"/>
 			<Setter Property="Background" Value="#666666"/>
 		</Style>
@@ -36,13 +36,40 @@
 			<RowDefinition Height="11*"/>
 		</Grid.RowDefinitions>
 		<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF"
-				  Grid.Row="1" HorizontalAlignment="Left" HorizontalContentAlignment="Center" VerticalAlignment="Top" 
-				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False"
-				  MaxHeight="358" Width="774" CanUserAddRows="False" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
+				  Grid.Row="1" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top"
+				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" 
+				  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+				  MaxHeight="358" Width="774" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
 			<DataGrid.Columns>
 				<DataGridCheckBoxColumn Header="Enabled" Width="50" Binding="{Binding Enabled}"/>
-				<DataGridTextColumn Header="Name" Width="220" Binding="{Binding Name}" />
-				<DataGridTextColumn Header="Description" Width="500" Binding="{Binding Description}" />
+				<DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}">
+					<DataGridTextColumn.ElementStyle>
+						<Style>
+							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
+				<DataGridTextColumn Header="Description" Width="270" Binding="{Binding Description}">
+					<DataGridTextColumn.ElementStyle>
+						<Style>
+							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
+				<DataGridTextColumn Header="Created" Width="150" Binding="{Binding CreatedTime}">
+					<DataGridTextColumn.ElementStyle>
+						<Style>
+							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
+				<DataGridTextColumn Header="Last Updated" Width="150" Binding="{Binding UpdatedTime}">
+					<DataGridTextColumn.ElementStyle>
+						<Style>
+							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
+						</Style>
+					</DataGridTextColumn.ElementStyle>
+				</DataGridTextColumn>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Grid Grid.Row="0" VerticalAlignment="Top" Height="30">

@@ -72,7 +72,7 @@ namespace Automata
 			}
 			else
 			{
-				var addUserResult = DBOps.Insert(
+				var addUserResult = Operations.Insert(
 					string.Format(
 					"INSERT INTO users(username, password) VALUES (\"{0}\", \"{1}\");",
 					username,
@@ -97,7 +97,7 @@ namespace Automata
 		{
 			string username = UsernameBox.Text;
 			string password = HashAndSalt(PasswordBox.Password);
-			var usersWithCreds = DBOps.Select(
+			var usersWithCreds = Operations.Select(
 				string.Format(
 				"SELECT username FROM users WHERE username='{0}' AND password='{1}';",
 				username,

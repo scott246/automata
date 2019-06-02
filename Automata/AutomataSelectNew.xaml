@@ -7,11 +7,13 @@
         mc:Ignorable="d"
 		Background="#666666" 
         Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="150" Width="400">
-    <Grid>
+	<Grid>
 		<Label Content="Name" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Width="70" Foreground="#FFFFFF"/>
-		<TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="92,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="290"/>
+		<TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="92,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="255" KeyUp="OnNameBoxChanged"/>
 		<Label Content="Description" HorizontalAlignment="Left" Margin="5,47,0,0" VerticalAlignment="Top" Width="70" Foreground="#FFFFFF"/>
-		<TextBox x:Name="DescriptionBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="290"/>
+		<TextBox x:Name="DescriptionBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="255" KeyUp="OnDescBoxChanged"/>
 		<Button x:Name="Create" Content="Create" HorizontalAlignment="Left" Margin="307,90,0,0" VerticalAlignment="Top" Width="75" Click="Create_Click"  IsDefault="True"/>
+		<Label x:Name="NameCharRemaining" Content="0" HorizontalAlignment="Left" Margin="352,15,0,0" VerticalAlignment="Top" Width="32" Foreground="#999999"/>
+		<Label x:Name="DescCharRemaining" Content="0" HorizontalAlignment="Left" Margin="352,47,0,0" VerticalAlignment="Top" Width="32" Foreground="#999999"/>
 	</Grid>
 </Window>

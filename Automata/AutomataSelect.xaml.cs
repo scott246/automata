@@ -12,6 +12,8 @@ namespace Automata
 		public bool Enabled { get; set; }
 		public string Name { get; set; }
 		public string Description { get; set; }
+		public DateTime CreatedTime { get; set; }
+		public DateTime UpdatedTime { get; set; }
 	}
 	/// <summary>
 	/// Interaction logic for Window1.xaml
@@ -39,7 +41,7 @@ namespace Automata
 
 		private void PopulateDataGrid()
 		{
-			var automata = DBOps.Select("SELECT automata_name, automata_desc, enabled FROM automata;");
+			var automata = Operations.Select("SELECT automata_name, automata_desc, enabled, created_date, updated_date FROM automata;");
 			if (automata == null)
 			{
 				System.Windows.Forms.MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -51,6 +53,8 @@ namespace Automata
 					Enabled = automata[i][2],
 					Name = automata[i][0],
 					Description = automata[i][1],
+					CreatedTime = automata[i][3],
+					UpdatedTime = automata[i][4],
 				});
 			}
 			AutomataGrid.ItemsSource = automataList;
@@ -70,16 +74,26 @@ namespace Automata
 			//ensure text boxes cannot be changed
 			AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
 			AutomataGrid.Columns[2].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
+			AutomataGrid.Columns[3].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
+			AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
 
 			//get name of changed status' automata
 			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
 
 			//update DB
-			var result = DBOps.Update(string.Format("UPDATE automata SET enabled={0} WHERE automata_name='{1}';", c.IsChecked, t.Text));
+			var result = Operations.Update(
+				string.Format("UPDATE automata SET enabled={0}, updated_date='{1}' WHERE automata_name='{2}';", 
+				c.IsChecked, 
+				Operations.GetDateTime(), 
+				t.Text));
 			if (result != 0)
 			{
 				System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+
+			//update local automata table
+			TextBlock t2 = AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
+			t2.Text = DateTime.Now.ToString();
 
 			Dispatcher.BeginInvoke(new Action(() =>
 			{
@@ -107,13 +121,17 @@ namespace Automata
 			if (newAutomataName != "")
 			{
 				//TODO: fix autoincrement to use all numbers before using a new one
-				var result = DBOps.Insert(
-				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled) VALUES (\"{0}\", \"{1}\", true);",
+				//TODO: ensure automata update time is accurate before going back to Automata Select 
+				var result = Operations.Insert(
+				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled, created_date, updated_date) VALUES (\"{0}\", \"{1}\", true, \"{2}\", \"{3}\");",
 				newAutomataName,
-				newAutomataDesc));
+				newAutomataDesc,
+				Operations.GetDateTime(),
+				Operations.GetDateTime()));
 				if (result != 0)
 				{
 					System.Windows.Forms.MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
 				}
 				new AutomataEdit(username, newAutomataName).Show();
 				Close();

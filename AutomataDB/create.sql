@@ -21,8 +21,10 @@ CREATE TABLE IF NOT EXISTS outputs (
 CREATE TABLE IF NOT EXISTS automata (
 	automata_id INT AUTO_INCREMENT,
     automata_name VARCHAR(30),
-    automata_desc VARCHAR(300),
+    automata_desc VARCHAR(100),
     enabled BOOLEAN,
+	created_date DATETIME,
+	updated_date DATETIME,
     input_id INT,
 	output_id INT,
     PRIMARY KEY (automata_id),

@@ -3,11 +3,16 @@ using System.Data;
 using Newtonsoft.Json;
 using System.IO;
 using MySql.Data.MySqlClient;
+using System;
 
 namespace Automata
 {
-	public class DBOps
+	public class Operations
 	{
+		//UNIVERSAL STATIC VARIABLES
+		public static int AutomataMaxNameLength = 30;
+		public static int AutomataMaxDescLength = 100;
+
 		private static MySqlConnection connection;
 		private static bool initialized = false;
 
@@ -19,6 +24,11 @@ namespace Automata
 				json = r.ReadToEnd();
 			}
 			return JsonConvert.DeserializeObject<Dictionary<string, dynamic>>(json)[s];
+		}
+
+		public static string GetDateTime()
+		{
+			return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
 		}
 
 		//Initialize values
