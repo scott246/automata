@@ -158,5 +158,10 @@ namespace Automata
 			new Login().Show();
 			Close();
 		}
+
+		private void DuplicateButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
 	}
 }

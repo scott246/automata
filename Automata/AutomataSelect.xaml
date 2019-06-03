@@ -22,7 +22,7 @@
 		<Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
 			<Setter Property="Height" Value="30"/>
 			<Setter Property="HorizontalContentAlignment" Value="Left"/>
-			<Setter Property="Foreground" Value="Orange"/>
+			<Setter Property="Foreground" Value="#FFA500"/>
 			<Setter Property="Background" Value="#666666"/>
 		</Style>
 		<Style x:Key="DGCStyle" TargetType="DataGridCell">
@@ -42,51 +42,41 @@
 				  MaxHeight="358" Width="774" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
 			<DataGrid.Columns>
 				<DataGridCheckBoxColumn Header="Enabled" Width="50" Binding="{Binding Enabled}"/>
-				<DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}">
-					<DataGridTextColumn.ElementStyle>
-						<Style>
-							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn Header="Description" Width="270" Binding="{Binding Description}">
-					<DataGridTextColumn.ElementStyle>
-						<Style>
-							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn Header="Created" Width="150" Binding="{Binding CreatedTime}">
-					<DataGridTextColumn.ElementStyle>
-						<Style>
-							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
-				<DataGridTextColumn Header="Last Updated" Width="150" Binding="{Binding UpdatedTime}">
-					<DataGridTextColumn.ElementStyle>
-						<Style>
-							<Setter Property="TextBlock.TextWrapping" Value="Wrap" />
-						</Style>
-					</DataGridTextColumn.ElementStyle>
-				</DataGridTextColumn>
+				<DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}"/>
+				<DataGridTextColumn Header="Description" Width="270" Binding="{Binding Description}"/>
+				<DataGridTextColumn Header="Created" Width="150" Binding="{Binding CreatedTime}"/>
+				<DataGridTextColumn Header="Last Updated" Width="150" Binding="{Binding UpdatedTime}"/>
 			</DataGrid.Columns>
 		</DataGrid>
 		<Grid Grid.Row="0" VerticalAlignment="Top" Height="30">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="75"/>
-				<ColumnDefinition Width="75"/>
-				<ColumnDefinition Width="75"/>
-				<ColumnDefinition Width="75"/>
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="32"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="75"/>
+				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
-			<Button x:Name="NewButton" Content="New" Click="NewButton_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="75" Margin="0,0,0,5"/>
-			<Button x:Name="OpenButton" Content="Open" Click="OpenButton_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Button x:Name="DeleteButton" Content="Delete" Click="DeleteButton_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Button x:Name="ToggleButton" Content="Toggle" Click="ToggleButton_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
-			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="4" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
-			<Button x:Name="LogoutButton" Content="Logout" Click="LogoutButton_Click" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75"/>
+			<Button x:Name="NewButton" ToolTip="New" Click="NewButton_Click" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\new.png"/>
+			</Button>
+			<Button x:Name="OpenButton" ToolTip="Edit" Click="OpenButton_Click" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\edit.png"/>
+			</Button>
+			<Button x:Name="DuplicateButton" ToolTip="Duplicate" Click="DuplicateButton_Click" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\copy.png"/>
+			</Button>
+			<Button x:Name="ToggleButton" ToolTip="Toggle" Click="ToggleButton_Click" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\toggle.png"/>
+			</Button>
+			<Button x:Name="DeleteButton" ToolTip="Delete" Click="DeleteButton_Click" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\delete.png"/>
+			</Button>
+			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="5" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Button x:Name="LogoutButton" ToolTip="Logout" Click="LogoutButton_Click" Grid.Column="6" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\logout.png"/>
+			</Button>
 		</Grid>
 	</Grid>
 </Window>
