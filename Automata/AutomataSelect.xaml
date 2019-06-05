@@ -9,25 +9,45 @@
 		Background="#333333" ResizeMode="NoResize"
         Title="Automata Select" Height="450" Width="800" WindowStartupLocation="CenterScreen">
 	<Window.Resources>
+		<Style x:Key="CustomCheckBox" TargetType="{x:Type CheckBox}">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="{x:Type CheckBox}">
+						<StackPanel Orientation="Horizontal">
+							<Image x:Name="imageCheckBox" Source="Resources\enabled_white.png" Width="20" Height="20" Margin="0" />
+							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						</StackPanel>
+						<ControlTemplate.Triggers>
+							<Trigger Property="IsChecked" Value="False">
+								<Setter TargetName="imageCheckBox" Property="Visibility" Value="Hidden" />
+							</Trigger>
+						</ControlTemplate.Triggers>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
 		<Style x:Key="DGStyle" TargetType="{x:Type DataGrid}">
-			<Setter Property="Background" Value="#666666"/>
+			<Setter Property="Background" Value="#333333"/>
 			<Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
 			<Setter Property="CellStyle" Value="{DynamicResource DGCStyle}"/>
 			<Setter Property="RowStyle" Value="{DynamicResource DGRStyle}"/>
 			<Setter Property="GridLinesVisibility" Value="None"/>
+			<Setter Property="AlternatingRowBackground" Value="#555555"/>
+			<Setter Property="AlternationCount" Value="2"/>
 		</Style>
 		<Style x:Key="DGRStyle" TargetType="DataGridRow">
 			<EventSetter Event="Selected" Handler="OnRowSelect"/>
 		</Style>
 		<Style x:Key="DGCHeaderStyle" TargetType="DataGridColumnHeader">
 			<Setter Property="Height" Value="30"/>
-			<Setter Property="HorizontalContentAlignment" Value="Left"/>
+			<Setter Property="HorizontalContentAlignment" Value="Center"/>
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
 			<Setter Property="Foreground" Value="#FFA500"/>
 			<Setter Property="Background" Value="#666666"/>
 		</Style>
 		<Style x:Key="DGCStyle" TargetType="DataGridCell">
+			<Setter Property="VerticalContentAlignment" Value="Center"/>
 			<Setter Property="Height" Value="30"/>
-			<Setter Property="BorderBrush" Value="#333333"/>
 		</Style>
 	</Window.Resources>
 	<Grid Margin="10,10,10,10">
@@ -35,13 +55,22 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="11*"/>
 		</Grid.RowDefinitions>
-		<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF"
-				  Grid.Row="1" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Top"
+		<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF" Grid.Row="1"
 				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" 
 				  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
 				  MaxHeight="358" Width="774" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
 			<DataGrid.Columns>
-				<DataGridCheckBoxColumn Header="Enabled" Width="50" Binding="{Binding Enabled}"/>
+				<DataGridTemplateColumn Header="Enabled" Width="50">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<CheckBox 
+								x:Name="EnabledCheckBox" 
+								HorizontalAlignment="Center" 
+								IsChecked="{Binding Enabled}"
+								Style="{DynamicResource CustomCheckBox}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTextColumn Header="Name" Width="150" Binding="{Binding Name}"/>
 				<DataGridTextColumn Header="Description" Width="270" Binding="{Binding Description}"/>
 				<DataGridTextColumn Header="Created" Width="150" Binding="{Binding CreatedTime}"/>

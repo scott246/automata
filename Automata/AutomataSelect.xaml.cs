@@ -22,6 +22,7 @@ namespace Automata
 	{
 		readonly string username = "";
 		readonly List<AutomataData> automataList = new List<AutomataData>();
+		private int selectedRow = -1;
 		public AutomataSelect(string user)
 		{
 			InitializeComponent();
@@ -62,43 +63,9 @@ namespace Automata
 
 		void OnRowSelect(object sender, RoutedEventArgs e)
 		{
-			Console.WriteLine("row selected");
-			//get row index
 			DataGridRow r = (DataGridRow)sender;
-			int rowindex = r.GetIndex();
-
-			//change checkbox enabled status
-			CheckBox c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[rowindex]) as CheckBox;
-			c.IsChecked = !c.IsChecked;
-
-			//ensure text boxes cannot be changed
-			AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
-			AutomataGrid.Columns[2].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
-			AutomataGrid.Columns[3].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
-			AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[rowindex]).IsEnabled = false;
-
-			//get name of changed status' automata
-			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
-
-			//update DB
-			var result = Operations.Update(
-				string.Format("UPDATE automata SET enabled={0}, updated_date='{1}' WHERE automata_name='{2}';", 
-				c.IsChecked, 
-				Operations.GetDateTime(), 
-				t.Text));
-			if (result != 0)
-			{
-				System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
-
-			//update local automata table
-			TextBlock t2 = AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[rowindex]) as TextBlock;
-			t2.Text = DateTime.Now.ToString();
-
-			Dispatcher.BeginInvoke(new Action(() =>
-			{
-				AutomataGrid.UnselectAll();
-			}));
+			selectedRow = r.GetIndex();
+			Console.WriteLine(selectedRow);
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -150,7 +117,39 @@ namespace Automata
 
 		private void ToggleButton_Click(object sender, RoutedEventArgs e)
 		{
+			if (selectedRow > -1)
+			{
+				Console.WriteLine("toggle button clicked");
+				//toggle automata enabled
+				var c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[selectedRow]);
+				ContentPresenter cp = (ContentPresenter)c;
+				AutomataData ad = (AutomataData)cp.Content;
+				ad.Enabled = !ad.Enabled;
 
+				//get name of changed status' automata
+				TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
+				
+				//update DB
+				var result = Operations.Update(
+					string.Format("UPDATE automata SET enabled={0}, updated_date='{1}' WHERE automata_name='{2}';",
+					ad.Enabled,
+					Operations.GetDateTime(),
+					t.Text));
+				if (result != 0)
+				{
+					System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+
+				//update local automata table
+				TextBlock t2 = AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
+				t2.Text = DateTime.Now.ToString();
+
+				Dispatcher.BeginInvoke(new Action(() =>
+				{
+					AutomataGrid.UnselectAll();
+					AutomataGrid.Items.Refresh();
+				}));
+			}
 		}
 
 		private void LogoutButton_Click(object sender, RoutedEventArgs e)

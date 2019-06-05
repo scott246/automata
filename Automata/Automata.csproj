@@ -212,5 +212,14 @@
   <ItemGroup>
     <Resource Include="Resources\logout.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\enabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\disabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\enabled_white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
