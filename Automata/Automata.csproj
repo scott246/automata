@@ -221,5 +221,8 @@
   <ItemGroup>
     <Resource Include="Resources\enabled_white.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\filter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

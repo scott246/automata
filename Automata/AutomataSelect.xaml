@@ -84,6 +84,9 @@
 				<ColumnDefinition Width="32"/>
 				<ColumnDefinition Width="32"/>
 				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="32"/>
 			</Grid.ColumnDefinitions>
@@ -102,8 +105,13 @@
 			<Button x:Name="DeleteButton" ToolTip="Delete" Click="DeleteButton_Click" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
 				<Image Source="Resources\delete.png"/>
 			</Button>
-			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="5" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
-			<Button x:Name="LogoutButton" ToolTip="Logout" Click="LogoutButton_Click" Grid.Column="6" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#333333">
+			<Button x:Name="FilterButton" ToolTip="Delete" Click="FilterButton_Click" Grid.Column="5" HorizontalAlignment="Center" VerticalAlignment="Center" Background="#333333">
+				<Image Source="Resources\filter.png"/>
+			</Button>
+			<TextBox x:Name="AutomataFilterInput" Grid.Column="6" Text="" Visibility="Hidden" TextChanged="AutomataFilterInput_TextChanged"/>
+			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" Grid.Column="7"/>
+			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="8" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Button x:Name="LogoutButton" ToolTip="Logout" Click="LogoutButton_Click" Grid.Column="9" HorizontalAlignment="Right" VerticalAlignment="Center" Background="#333333">
 				<Image Source="Resources\logout.png"/>
 			</Button>
 		</Grid>

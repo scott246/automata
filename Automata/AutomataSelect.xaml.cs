@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using CheckBox = System.Windows.Controls.CheckBox;
+using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata
 {
@@ -65,7 +66,6 @@ namespace Automata
 		{
 			DataGridRow r = (DataGridRow)sender;
 			selectedRow = r.GetIndex();
-			Console.WriteLine(selectedRow);
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -119,7 +119,6 @@ namespace Automata
 		{
 			if (selectedRow > -1)
 			{
-				Console.WriteLine("toggle button clicked");
 				//toggle automata enabled
 				var c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[selectedRow]);
 				ContentPresenter cp = (ContentPresenter)c;
@@ -140,10 +139,6 @@ namespace Automata
 					System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 
-				//update local automata table
-				TextBlock t2 = AutomataGrid.Columns[4].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
-				t2.Text = DateTime.Now.ToString();
-
 				Dispatcher.BeginInvoke(new Action(() =>
 				{
 					AutomataGrid.UnselectAll();
@@ -161,6 +156,52 @@ namespace Automata
 		private void DuplicateButton_Click(object sender, RoutedEventArgs e)
 		{
 
+		}
+
+		private void FilterButton_Click(object sender, RoutedEventArgs e)
+		{
+			if (AutomataFilterInput.Visibility == Visibility.Hidden)
+			{
+				AutomataFilterInput.Visibility = Visibility.Visible;
+				AutomataFilterCount.Visibility = Visibility.Visible;
+				AutomataFilterCount.Content = AutomataGrid.Items.Count + " automata found";
+				AutomataFilterInput.SelectAll();
+				AutomataFilterInput.Focus();
+			}
+			else
+			{
+				AutomataFilterInput.Visibility = Visibility.Hidden;
+				AutomataFilterCount.Visibility = Visibility.Hidden;
+				AutomataFilterInput.Text = "";
+				AutomataFilterCount.Content = "";
+			}
+		}
+
+		private void AutomataFilterInput_TextChanged(object sender, TextChangedEventArgs e)
+		{
+			TextBox tb = (TextBox)e.Source;
+			string input = tb.Text;
+			int count = 0;
+			List<AutomataData> filteredList = new List<AutomataData>();
+			if (input.Length == 0)
+			{
+				AutomataGrid.ItemsSource = automataList;
+				AutomataFilterCount.Content = AutomataGrid.Items.Count + " automata found";
+			}
+			else
+			{
+				foreach (var item in automataList)
+				{
+					
+					if (item.Name.Contains(input))
+					{
+						count++;
+						filteredList.Add(item);
+					}
+				}
+				AutomataFilterCount.Content = count + " automata found";
+				AutomataGrid.ItemsSource = filteredList;
+			}
 		}
 	}
 }
