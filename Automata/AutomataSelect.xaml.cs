@@ -3,19 +3,10 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-using CheckBox = System.Windows.Controls.CheckBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata
 {
-	public class AutomataData
-	{
-		public bool Enabled { get; set; }
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public DateTime CreatedTime { get; set; }
-		public DateTime UpdatedTime { get; set; }
-	}
 	/// <summary>
 	/// Interaction logic for Window1.xaml
 	/// </summary>
@@ -66,6 +57,19 @@ namespace Automata
 		{
 			DataGridRow r = (DataGridRow)sender;
 			selectedRow = r.GetIndex();
+			ToggleButton.Visibility = Visibility.Visible;
+			DuplicateButton.Visibility = Visibility.Visible;
+			OpenButton.Visibility = Visibility.Visible;
+			DeleteButton.Visibility = Visibility.Visible;
+		}
+
+		void OnRowDeselect(object sender, RoutedEventArgs e)
+		{
+			selectedRow = -1;
+			ToggleButton.Visibility = Visibility.Hidden;
+			DuplicateButton.Visibility = Visibility.Hidden;
+			OpenButton.Visibility = Visibility.Hidden;
+			DeleteButton.Visibility = Visibility.Hidden;
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
@@ -203,5 +207,19 @@ namespace Automata
 				AutomataGrid.ItemsSource = filteredList;
 			}
 		}
+
+		private void HelpButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+	}
+
+	public class AutomataData
+	{
+		public bool Enabled { get; set; }
+		public string Name { get; set; }
+		public string Description { get; set; }
+		public DateTime CreatedTime { get; set; }
+		public DateTime UpdatedTime { get; set; }
 	}
 }
