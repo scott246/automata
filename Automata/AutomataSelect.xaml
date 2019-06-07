@@ -56,7 +56,7 @@
 			<RowDefinition Height="*"/>
 			<RowDefinition Height="11*"/>
 		</Grid.RowDefinitions>
-		<Grid Grid.Row="0" VerticalAlignment="Top" Height="30">
+		<Grid Grid.Row="0" VerticalAlignment="Top" Height="32">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="100"/>
@@ -73,7 +73,7 @@
 			</Button>
 			<TextBox x:Name="AutomataFilterInput" Grid.Column="1" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
 			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" Grid.Column="2"/>
-			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="3" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0"/>
+			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="3" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="#FFB0B0B0" Height="32" Margin="0,3,5,0"/>
 			<Button x:Name="LogoutButton" Width="80" Click="LogoutButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="#333333">
 				<StackPanel Orientation="Horizontal">
 					<Label Content="Logout" Foreground="#B0B0B0"/>
@@ -92,7 +92,6 @@
 					<RowDefinition Height="32"/>
 					<RowDefinition Height="32"/>
 					<RowDefinition Height="32"/>
-					<RowDefinition Height="32"/>
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="32"/>
 				</Grid.RowDefinitions>
@@ -102,25 +101,19 @@
 						<Label Content="New Automata" Foreground="#B0B0B0"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="OpenButton" Visibility="Hidden" Width="150" Click="OpenButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="EditButton" Visibility="Hidden" Width="150" Click="EditButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="#333333">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\edit.png"/>
 						<Label Content="Edit Automata" Foreground="#B0B0B0"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="DuplicateButton" Visibility="Hidden" Width="150" Click="DuplicateButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="#333333">
-					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\copy.png"/>
-						<Label Content="Duplicate Automata" Foreground="#B0B0B0"/>
-					</StackPanel>
-				</Button>
-				<Button x:Name="ToggleButton" Visibility="Hidden" Width="150" Click="ToggleButton_Click" BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="ToggleButton" Visibility="Hidden" Width="150" Click="ToggleButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="#333333">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\toggle.png"/>
 						<Label Content="Toggle Automata" Foreground="#B0B0B0"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="DeleteButton" Visibility="Hidden" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="DeleteButton" Visibility="Hidden" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="#333333">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\delete.png"/>
 						<Label Content="Delete Automata" Foreground="#B0B0B0"/>
@@ -135,7 +128,7 @@
 			</Grid>
 			<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF" Grid.Column="1"
 				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" CanUserSortColumns="False"
-				  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
+				  CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
 				  MaxHeight="358" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
 				<DataGrid.Columns>
 					<DataGridTemplateColumn Header="Enabled" Width="*">

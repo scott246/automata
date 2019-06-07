@@ -61,8 +61,7 @@ namespace Automata
 			DataGridRow r = (DataGridRow)sender;
 			selectedRow = r.GetIndex();
 			ToggleButton.Visibility = Visibility.Visible;
-			DuplicateButton.Visibility = Visibility.Visible;
-			OpenButton.Visibility = Visibility.Visible;
+			EditButton.Visibility = Visibility.Visible;
 			DeleteButton.Visibility = Visibility.Visible;
 		}
 
@@ -70,15 +69,8 @@ namespace Automata
 		{
 			selectedRow = -1;
 			ToggleButton.Visibility = Visibility.Hidden;
-			DuplicateButton.Visibility = Visibility.Hidden;
-			OpenButton.Visibility = Visibility.Hidden;
+			EditButton.Visibility = Visibility.Hidden;
 			DeleteButton.Visibility = Visibility.Hidden;
-		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
-		{
-			new AutomataEdit(username, "test project title").Show();
-			Close();
 		}
 
 		private void NewButton_Click(object sender, RoutedEventArgs e)
@@ -94,8 +86,6 @@ namespace Automata
 			string newAutomataDesc = asn.automataDesc;
 			if (newAutomataName != "")
 			{
-				//TODO: fix autoincrement to use all numbers before using a new one
-				//TODO: ensure automata update time is accurate before going back to Automata Select 
 				var result = Operations.Insert(
 				string.Format("INSERT INTO automata(automata_name, automata_desc, enabled, created_date, updated_date) VALUES (\"{0}\", \"{1}\", true, \"{2}\", \"{3}\");",
 				newAutomataName,
@@ -112,9 +102,11 @@ namespace Automata
 			}
 		}
 
-		private void OpenButton_Click(object sender, RoutedEventArgs e)
+		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
+			new AutomataEdit(username, t.Text).Show();
+			Close();
 		}
 
 		private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -174,11 +166,6 @@ namespace Automata
 			Close();
 		}
 
-		private void DuplicateButton_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
 		private void FilterButton_Click(object sender, RoutedEventArgs e)
 		{
 			if (AutomataFilterInput.Visibility == Visibility.Hidden)
@@ -227,7 +214,8 @@ namespace Automata
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			new AutomataHelp().Show();
+			Close();
 		}
 	}
 
