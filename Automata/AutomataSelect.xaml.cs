@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using MessageBox = System.Windows.Forms.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata
@@ -13,7 +14,7 @@ namespace Automata
 	public partial class AutomataSelect : Window
 	{
 		readonly string username = "";
-		readonly List<AutomataData> automataList = new List<AutomataData>();
+		List<AutomataData> automataList = new List<AutomataData>();
 		private int selectedRow = -1;
 		public AutomataSelect(string user)
 		{
@@ -34,11 +35,13 @@ namespace Automata
 
 		private void PopulateDataGrid()
 		{
-			var automata = Operations.Select("SELECT automata_name, automata_desc, enabled, created_date, updated_date FROM automata;");
+			var automata = Operations.Select("SELECT automata_name, automata_desc, enabled, created_date, updated_date FROM automata ORDER BY updated_date DESC;");
 			if (automata == null)
 			{
-				System.Windows.Forms.MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				return;
 			}
+			automataList = new List<AutomataData>();
 			for (var i = 0; i < automata.Count; i++)
 			{
 				automataList.Add(new AutomataData()
@@ -101,7 +104,7 @@ namespace Automata
 				Operations.GetDateTime()));
 				if (result != 0)
 				{
-					System.Windows.Forms.MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 					return;
 				}
 				new AutomataEdit(username, newAutomataName).Show();
@@ -116,39 +119,53 @@ namespace Automata
 
 		private void DeleteButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			DialogResult dr = MessageBox.Show("Are you sure you want to delete? This cannot be undone.", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+			if (dr.ToString() == "Yes")
+			{
+				TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
+				int result = Operations.Delete(
+				string.Format("DELETE FROM automata WHERE automata_name='{0}';", t.Text));
+				if (result != 0)
+				{
+					MessageBox.Show("Error deleting automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+				Dispatcher.BeginInvoke(new Action(() =>
+				{
+					AutomataGrid.UnselectAll();
+					PopulateDataGrid();
+					AutomataGrid.Items.Refresh();
+				}));
+			}
 		}
 
 		private void ToggleButton_Click(object sender, RoutedEventArgs e)
 		{
-			if (selectedRow > -1)
-			{
-				//toggle automata enabled
-				var c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[selectedRow]);
-				ContentPresenter cp = (ContentPresenter)c;
-				AutomataData ad = (AutomataData)cp.Content;
-				ad.Enabled = !ad.Enabled;
+			//toggle automata enabled
+			var c = AutomataGrid.Columns[0].GetCellContent(AutomataGrid.Items[selectedRow]);
+			ContentPresenter cp = (ContentPresenter)c;
+			AutomataData ad = (AutomataData)cp.Content;
+			ad.Enabled = !ad.Enabled;
 
-				//get name of changed status' automata
-				TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
+			//get name of changed status' automata
+			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
 				
-				//update DB
-				var result = Operations.Update(
-					string.Format("UPDATE automata SET enabled={0}, updated_date='{1}' WHERE automata_name='{2}';",
-					ad.Enabled,
-					Operations.GetDateTime(),
-					t.Text));
-				if (result != 0)
-				{
-					System.Windows.Forms.MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-
-				Dispatcher.BeginInvoke(new Action(() =>
-				{
-					AutomataGrid.UnselectAll();
-					AutomataGrid.Items.Refresh();
-				}));
+			//update DB
+			var result = Operations.Update(
+				string.Format("UPDATE automata SET enabled={0}, updated_date='{1}' WHERE automata_name='{2}';",
+				ad.Enabled,
+				Operations.GetDateTime(),
+				t.Text));
+			if (result != 0)
+			{
+				MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
+
+			Dispatcher.BeginInvoke(new Action(() =>
+			{
+				AutomataGrid.UnselectAll();
+				AutomataGrid.Items.Refresh();
+			}));
 		}
 
 		private void LogoutButton_Click(object sender, RoutedEventArgs e)

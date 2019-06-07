@@ -134,8 +134,8 @@
 				</Button>
 			</Grid>
 			<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF" Grid.Column="1"
-				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False"
-				  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False"
+				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" CanUserSortColumns="False"
+				  CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
 				  MaxHeight="358" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
 				<DataGrid.Columns>
 					<DataGridTemplateColumn Header="Enabled" Width="*">
