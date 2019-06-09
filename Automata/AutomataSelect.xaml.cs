@@ -172,7 +172,7 @@ namespace Automata
 			{
 				AutomataFilterInput.Visibility = Visibility.Visible;
 				AutomataFilterCount.Visibility = Visibility.Visible;
-				AutomataFilterCount.Content = AutomataGrid.Items.Count + " automata found";
+				AutomataFilterCount.Content = AutomataGrid.Items.Count + " found";
 				AutomataFilterInput.SelectAll();
 				AutomataFilterInput.Focus();
 			}
@@ -194,7 +194,7 @@ namespace Automata
 			if (input.Length == 0)
 			{
 				AutomataGrid.ItemsSource = automataList;
-				AutomataFilterCount.Content = AutomataGrid.Items.Count + " automata found";
+				AutomataFilterCount.Content = AutomataGrid.Items.Count + " found";
 			}
 			else
 			{
@@ -207,7 +207,7 @@ namespace Automata
 						filteredList.Add(item);
 					}
 				}
-				AutomataFilterCount.Content = count + " automata found";
+				AutomataFilterCount.Content = count + " found";
 				AutomataGrid.ItemsSource = filteredList;
 			}
 		}

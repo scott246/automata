@@ -210,7 +210,7 @@
     <Resource Include="Resources\toggle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logout.png" />
+    <Resource Include="Resources\logout_right.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\enabled.png" />
@@ -226,6 +226,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logout_left.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

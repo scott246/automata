@@ -153,9 +153,19 @@ namespace Automata.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap logout {
+        internal static System.Drawing.Bitmap logout_left {
             get {
-                object obj = ResourceManager.GetObject("logout", resourceCulture);
+                object obj = ResourceManager.GetObject("logout_left", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap logout_right {
+            get {
+                object obj = ResourceManager.GetObject("logout_right", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
