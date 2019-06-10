@@ -109,9 +109,6 @@
     <Compile Include="AutomataEdit.xaml.cs">
       <DependentUpon>AutomataEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AutomataHelp.xaml.cs">
-      <DependentUpon>AutomataHelp.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AutomataSelect.xaml.cs">
       <DependentUpon>AutomataSelect.xaml</DependentUpon>
     </Compile>
@@ -119,10 +116,6 @@
       <DependentUpon>AutomataSelectNew.xaml</DependentUpon>
     </Compile>
     <Page Include="AutomataEdit.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="AutomataHelp.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,7 +188,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\new.png" />
+    <Resource Include="Resources\filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\save.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\edit.png" />
@@ -204,31 +206,19 @@
     <Resource Include="Resources\delete.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\copy.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\toggle.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logout_right.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\enabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\disabled.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\enabled_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\filter.png" />
+    <Resource Include="Resources\back.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\help.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\logout_left.png" />
+    <Resource Include="Resources\new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\enabled.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

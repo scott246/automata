@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Automata"
         xmlns:Custom="http://schemas.microsoft.com/winfx/2006/xaml/presentation/ribbon" x:Class="Automata.AutomataSelect"
         mc:Ignorable="d"
-		Background="#333333" ResizeMode="NoResize"
+		Background="{StaticResource AppBackground}" ResizeMode="NoResize"
         Title="Automata Select" Height="450" Width="800" WindowStartupLocation="CenterScreen">
 	<Window.Resources>
 		<Style x:Key="CustomCheckBox" TargetType="{x:Type CheckBox}">
@@ -14,7 +14,7 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type CheckBox}">
 						<StackPanel Orientation="Horizontal">
-							<Image x:Name="imageCheckBox" Source="Resources\enabled_white.png" Width="20" Height="20" Margin="0" />
+							<Image x:Name="imageCheckBox" Source="Resources\enabled.png" Width="20" Height="20" Margin="0" />
 							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<ControlTemplate.Triggers>
@@ -27,7 +27,7 @@
 			</Setter>
 		</Style>
 		<Style x:Key="DGStyle" TargetType="{x:Type DataGrid}">
-			<Setter Property="Background" Value="#333333"/>
+			<Setter Property="Background" Value="{StaticResource AppBackground}"/>
 			<Setter Property="ColumnHeaderStyle" Value="{DynamicResource DGCHeaderStyle}"/>
 			<Setter Property="CellStyle" Value="{DynamicResource DGCStyle}"/>
 			<Setter Property="RowStyle" Value="{DynamicResource DGRStyle}"/>
@@ -43,8 +43,8 @@
 			<Setter Property="Height" Value="30"/>
 			<Setter Property="HorizontalContentAlignment" Value="Center"/>
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
-			<Setter Property="Foreground" Value="#FFA500"/>
-			<Setter Property="Background" Value="#666666"/>
+			<Setter Property="Foreground" Value="{StaticResource TitleForeground}"/>
+			<Setter Property="Background" Value="{StaticResource SectionBackground}"/>
 		</Style>
 		<Style x:Key="DGCStyle" TargetType="DataGridCell">
 			<Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -53,8 +53,8 @@
 	</Window.Resources>
 	<Grid Margin="10,10,10,10">
 		<Grid.RowDefinitions>
+			<RowDefinition Height="32"/>
 			<RowDefinition Height="*"/>
-			<RowDefinition Height="11*"/>
 		</Grid.RowDefinitions>
 		<Grid Grid.Row="0" VerticalAlignment="Top" Height="32">
 			<Grid.ColumnDefinitions>
@@ -64,20 +64,19 @@
 				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="150"/>
 			</Grid.ColumnDefinitions>
-
-			<Button x:Name="FilterButton" Width="150" Click="FilterButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="#333333">
+			<Button x:Name="LogoutButton" Width="150" Click="LogoutButton_Click" BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
-					<Label Content="Filter Automata" Foreground="#B0B0B0"/>
-					<Image Source="Resources\filter.png"/>
+					<Image Source="Resources\logout.png"/>
+					<Label Content="Logout" Foreground="{StaticResource TextForeground}"/>
 				</StackPanel>
 			</Button>
-			<TextBox x:Name="AutomataFilterInput" Grid.Column="3" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
-			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Column="2"/>
 			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" Foreground="#FFB0B0B0" Height="32" Margin="0"/>
-			<Button x:Name="LogoutButton" Width="150" Click="LogoutButton_Click" BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="#333333">
+			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Column="2"/>
+			<TextBox x:Name="AutomataFilterInput" Grid.Column="3" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
+			<Button x:Name="FilterButton" Width="150" Click="FilterButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="Resources\logout_left.png"/>
-					<Label Content="Logout" Foreground="#B0B0B0"/>
+					<Label Content="Filter Automata" Foreground="{StaticResource TextForeground}"/>
+					<Image Source="Resources\filter.png"/>
 				</StackPanel>
 			</Button>
 		</Grid>
@@ -95,38 +94,38 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="32"/>
 				</Grid.RowDefinitions>
-				<Button x:Name="NewButton" Width="150" Click="NewButton_Click" BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="NewButton" Width="150" Click="NewButton_Click" BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\new.png"/>
-						<Label Content="New Automata" Foreground="#B0B0B0"/>
+						<Label Content="New Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="EditButton" Visibility="Hidden" Width="150" Click="EditButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="EditButton" Visibility="Hidden" Width="150" Click="EditButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\edit.png"/>
-						<Label Content="Edit Automata" Foreground="#B0B0B0"/>
+						<Label Content="Edit Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="ToggleButton" Visibility="Hidden" Width="150" Click="ToggleButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="ToggleButton" Visibility="Hidden" Width="150" Click="ToggleButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\toggle.png"/>
-						<Label Content="Toggle Automata" Foreground="#B0B0B0"/>
+						<Label Content="Toggle Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="DeleteButton" Visibility="Hidden" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="DeleteButton" Visibility="Hidden" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\delete.png"/>
-						<Label Content="Delete Automata" Foreground="#B0B0B0"/>
+						<Label Content="Delete Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click" BorderThickness="0" Grid.Row="6" HorizontalContentAlignment="Left" Background="#333333">
+				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click" BorderThickness="0" Grid.Row="6" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="Resources\help.png"/>
-						<Label Content="Help" Foreground="#B0B0B0"/>
+						<Label Content="Help" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 			</Grid>
-			<DataGrid x:Name="AutomataGrid" Background="#333333" RowBackground="#666666" Foreground="#FFFFFF" Grid.Column="1"
+			<DataGrid x:Name="AutomataGrid" Background="{StaticResource AppBackground}" RowBackground="{StaticResource SectionBackground}" Foreground="{StaticResource InnerTextForeground}" Grid.Column="1"
 				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" CanUserSortColumns="False"
 				  CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
 				  MaxHeight="358" IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">

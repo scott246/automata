@@ -13,27 +13,25 @@ namespace Automata
 		public AutomataEdit(string name, string title)
 		{
 			InitializeComponent();
-			author.Content = name;
-			project_name.Content = title;
+			AutomataNameDisplay.Content = title;
 			username = name;
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e)
 		{
-			new AutomataSelect(username).Show();
-			Close();
+			
 		}
 
 		int maxLC = 1;
 		private void Script_textbox_KeyUp(object sender, KeyEventArgs e)
 		{
-			int linecount = script_textbox.GetLastVisibleLineIndex() + 1;
+			int linecount = ScriptTextBox.GetLastVisibleLineIndex() + 1;
 			if (linecount != maxLC)
 			{
-				line_number_textbox.Clear();
+				LineNumberTextBox.Clear();
 				for (int i = 1; i < linecount + 1; i++)
 				{
-					line_number_textbox.AppendText(Convert.ToString(i) + "\n");
+					LineNumberTextBox.AppendText(Convert.ToString(i) + "\n");
 				}
 				maxLC = linecount;
 			}
@@ -41,7 +39,38 @@ namespace Automata
 
 		private void Help_Clicked(object sender, RoutedEventArgs e)
 		{
-			new AutomataHelp().Show();
+			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
+		}
+
+		private void ReturnButton_Click(object sender, RoutedEventArgs e)
+		{
+			new AutomataSelect(username).Show();
+			Close();
+		}
+
+		private void RunButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void EditButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void SaveButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void DeleteButton_Click(object sender, RoutedEventArgs e)
+		{
+
+		}
+
+		private void HelpButton_Click(object sender, RoutedEventArgs e)
+		{
+
 		}
 	}
 }

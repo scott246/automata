@@ -214,8 +214,7 @@ namespace Automata
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
-			new AutomataHelp().Show();
-			Close();
+			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
 		}
 	}
 
