@@ -29,28 +29,32 @@ namespace Automata
 			//ensure name exists
 			if (name.Length == 0)
 			{
-				MessageBox.Show("Name cannot be blank.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				//MessageBox.Show("Name cannot be blank.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				new Message("Name cannot be blank.", "Error", false, false).ShowDialog();
 				return;
 			}
 
 			//ensure name can fit in db
 			if (name.Length > Operations.AutomataMaxNameLength)
 			{
-				MessageBox.Show("Maximum name size is " + Operations.AutomataMaxNameLength + " characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				//MessageBox.Show("Maximum name size is " + Operations.AutomataMaxNameLength + " characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				new Message("Maximum name size is " + Operations.AutomataMaxNameLength + " characters.", "Error", false, false).ShowDialog();
 				return;
 			}
 
 			//ensure name contains only valid characters
 			if (!(new Regex(@"^[a-zA-Z0-9-]*$").IsMatch(name)))
 			{
-				MessageBox.Show("Name must have only alphanumeric characters or a dash (-).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				//MessageBox.Show("Name must have only alphanumeric characters or a dash (-).", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				new Message("Name must have only alphanumeric characters or a dash (-).", "Error", false, false).ShowDialog();
 				return;
 			}
 
 			//ensure description can fit in db
 			if (desc.Length > Operations.AutomataMaxDescLength)
 			{
-				MessageBox.Show("Maximum description size is " + Operations.AutomataMaxDescLength + " characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				//MessageBox.Show("Maximum description size is " + Operations.AutomataMaxDescLength + " characters.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				new Message("Maximum description size is " + Operations.AutomataMaxDescLength + " characters.", "Error", false, false).ShowDialog();
 				return;
 			}
 
@@ -59,7 +63,8 @@ namespace Automata
 			{
 				if (existingName == name)
 				{
-					MessageBox.Show("Name must be unique.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					//MessageBox.Show("Name must be unique.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+					new Message("Name must be unique.", "Error", false, false).ShowDialog();
 					return;
 				}
 			}

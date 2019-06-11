@@ -4,21 +4,42 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Automata"
-        mc:Ignorable="d"
+        mc:Ignorable="d" SizeToContent="WidthAndHeight"
 		Background="{StaticResource AppBackground}" 
-        Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Height="150" Width="450">
+        Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
-		<Label Content="Name" HorizontalAlignment="Left" Margin="5,15,0,0" VerticalAlignment="Top" Width="70" Foreground="{StaticResource InnerTextForeground}"/>
-		<TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" Margin="92,15,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="303" KeyUp="OnNameBoxChanged"/>
-		<Label Content="Description" HorizontalAlignment="Left" Margin="5,47,0,0" VerticalAlignment="Top" Width="70" Foreground="{StaticResource InnerTextForeground}"/>
-		<TextBox x:Name="DescriptionBox" HorizontalAlignment="Left" Height="23" Margin="92,50,0,0" VerticalAlignment="Top" Width="303" KeyUp="OnDescBoxChanged"/>
-		<Button x:Name="Create" Width="150" Height="32" HorizontalAlignment="Left" Margin="295,90,-0.333,0" VerticalAlignment="Top" BorderThickness="0" HorizontalContentAlignment="Left" Click="Create_Click" IsDefault="True" Background="{StaticResource AppBackground}">
-			<StackPanel Orientation="Horizontal">
-				<Image Source="..\Resources\new.png"/>
-				<Label Content="Create Automata" Foreground="{StaticResource TextForeground}"/>
-			</StackPanel>
-		</Button>
-		<Label x:Name="NameCharRemaining" Content="0" HorizontalAlignment="Left" Margin="403,15,0,0" VerticalAlignment="Top" Width="32" Foreground="{StaticResource TextForeground}"/>
-		<Label x:Name="DescCharRemaining" Content="0" HorizontalAlignment="Left" Margin="403,47,0,0" VerticalAlignment="Top" Width="32" Foreground="{StaticResource TextForeground}"/>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="32"/>
+			<RowDefinition Height="32"/>
+			<RowDefinition Height="32"/>
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="50"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Name" VerticalAlignment="Center" HorizontalAlignment="Right" Foreground="{StaticResource InnerTextForeground}" Grid.Column="0"/>
+			<TextBox x:Name="NameBox" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="300" KeyUp="OnNameBoxChanged" Grid.Column="1"/>
+			<Label x:Name="NameCharRemaining" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Foreground="{StaticResource TextForeground}" Grid.Column="2"/>
+		</Grid>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition Width="300"/>
+				<ColumnDefinition Width="50"/>
+			</Grid.ColumnDefinitions>
+			<Label Content="Description" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource InnerTextForeground}" Grid.Column="0"/>
+			<TextBox x:Name="DescriptionBox" HorizontalAlignment="Left" Height="23" VerticalAlignment="Center" Width="300" KeyUp="OnDescBoxChanged" Grid.Column="1"/>
+			<Label x:Name="DescCharRemaining" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Foreground="{StaticResource TextForeground}" Grid.Column="2"/>
+		</Grid>
+		<Grid Grid.Row="2">
+			<Button x:Name="Create" Width="150" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" HorizontalContentAlignment="Left" Click="Create_Click" IsDefault="True" Background="{StaticResource AppBackground}">
+				<StackPanel Orientation="Horizontal">
+					<Image Source="..\Resources\new.png"/>
+					<Label Content="Create Automata" Foreground="{StaticResource TextForeground}"/>
+				</StackPanel>
+			</Button>
+		</Grid>
 	</Grid>
 </Window>
