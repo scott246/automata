@@ -50,7 +50,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>__TemplateIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\__TemplateIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -106,20 +106,27 @@
     <Compile Include="Actions\FileCreate.cs" />
     <Compile Include="Actions\SendText.cs" />
     <Compile Include="Actions\SendMail.cs" />
-    <Compile Include="AutomataEdit.xaml.cs">
+    <Compile Include="Dialogs\Message.xaml.cs">
+      <DependentUpon>Message.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Screens\AutomataEdit.xaml.cs">
       <DependentUpon>AutomataEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AutomataSelect.xaml.cs">
+    <Compile Include="Screens\AutomataSelect.xaml.cs">
       <DependentUpon>AutomataSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AutomataSelectNew.xaml.cs">
-      <DependentUpon>AutomataSelectNew.xaml</DependentUpon>
+    <Compile Include="Dialogs\NewAutomata.xaml.cs">
+      <DependentUpon>NewAutomata.xaml</DependentUpon>
     </Compile>
-    <Page Include="AutomataEdit.xaml">
+    <Page Include="Dialogs\Message.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Screens\AutomataEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Login.xaml">
+    <Page Include="Screens\Login.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -127,16 +134,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Operations.cs" />
-    <Compile Include="Login.xaml.cs">
+    <Compile Include="Common\Operations.cs" />
+    <Compile Include="Screens\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="AutomataSelect.xaml">
+    <Page Include="Screens\AutomataSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AutomataSelectNew.xaml">
+    <Page Include="Dialogs\NewAutomata.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -160,7 +167,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="secrets.json" />
+    <None Include="Common\secrets.json" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -173,7 +180,7 @@
     <Resource Include="Resources\title.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="__TemplateIcon.ico" />
+    <Resource Include="Resources\__TemplateIcon.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -219,6 +226,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\enabled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\forward.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\ok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\cancel.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

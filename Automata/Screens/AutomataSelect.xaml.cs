@@ -38,7 +38,8 @@ namespace Automata
 			var automata = Operations.Select("SELECT automata_name, automata_desc, enabled, created_date, updated_date FROM automata ORDER BY updated_date DESC;");
 			if (automata == null)
 			{
-				MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show("Error retrieving automata.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				new Message("Error retrieving automata", "Error", false, false).ShowDialog();
 				return;
 			}
 			automataList = new List<AutomataData>();
@@ -80,7 +81,7 @@ namespace Automata
 			{
 				existingAutomataNames.Add(ad.Name);
 			}
-			AutomataSelectNew asn = new AutomataSelectNew(existingAutomataNames.ToArray());
+			NewAutomata asn = new NewAutomata(existingAutomataNames.ToArray());
 			asn.ShowDialog();
 			string newAutomataName = asn.automataName;
 			string newAutomataDesc = asn.automataDesc;
@@ -94,7 +95,8 @@ namespace Automata
 				Operations.GetDateTime()));
 				if (result != 0)
 				{
-					MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					//MessageBox.Show("Error creating automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					new Message("Error creating automata (" + result + ").", "Error", false, false).ShowDialog();
 					return;
 				}
 				new AutomataEdit(username, newAutomataName).Show();
@@ -111,15 +113,19 @@ namespace Automata
 
 		private void DeleteButton_Click(object sender, RoutedEventArgs e)
 		{
-			DialogResult dr = MessageBox.Show("Are you sure you want to delete? This cannot be undone.", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-			if (dr.ToString() == "Yes")
+			Message m = new Message("Are you sure you want to delete? This cannot be undone.", "Delete?", false, true);
+			m.ShowDialog();
+			int i = m.response;
+			//DialogResult dr = MessageBox.Show("Are you sure you want to delete? This cannot be undone.", "Delete", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+			if (i == 1)
 			{
 				TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
 				int result = Operations.Delete(
 				string.Format("DELETE FROM automata WHERE automata_name='{0}';", t.Text));
 				if (result != 0)
 				{
-					MessageBox.Show("Error deleting automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					//MessageBox.Show("Error deleting automata (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					new Message("Error deleting automata (" + result + ").", "Error", false, false).ShowDialog();
 					return;
 				}
 				Dispatcher.BeginInvoke(new Action(() =>
@@ -150,7 +156,8 @@ namespace Automata
 				t.Text));
 			if (result != 0)
 			{
-				MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				//MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				new Message("Error changing automata status (" + result + ").", "Error", false, false).ShowDialog();
 			}
 
 			Dispatcher.BeginInvoke(new Action(() =>

@@ -7,13 +7,13 @@ namespace Automata
 	/// <summary>
 	/// Interaction logic for Window1.xaml
 	/// </summary>
-	public partial class AutomataSelectNew : Window
+	public partial class NewAutomata : Window
 	{
 		public string automataName = "";
 		public string automataDesc = "";
 		readonly string[] existingAutomataNames;
 		
-		public AutomataSelectNew(string[] vs)
+		public NewAutomata(string[] vs)
 		{
 			InitializeComponent();
 			existingAutomataNames = vs;

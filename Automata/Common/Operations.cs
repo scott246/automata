@@ -19,7 +19,7 @@ namespace Automata
 		public static dynamic GetSecret(string s)
 		{
 			string json = string.Empty;
-			using (StreamReader r = new StreamReader("../../secrets.json"))
+			using (StreamReader r = new StreamReader("../../Common/secrets.json"))
 			{
 				json = r.ReadToEnd();
 			}

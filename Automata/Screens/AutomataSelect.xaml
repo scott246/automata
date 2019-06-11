@@ -14,7 +14,7 @@
 				<Setter.Value>
 					<ControlTemplate TargetType="{x:Type CheckBox}">
 						<StackPanel Orientation="Horizontal">
-							<Image x:Name="imageCheckBox" Source="Resources\enabled.png" Width="20" Height="20" Margin="0" />
+							<Image x:Name="imageCheckBox" Source="..\Resources\enabled.png" Width="20" Height="20" Margin="0" />
 							<ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
 						</StackPanel>
 						<ControlTemplate.Triggers>
@@ -66,7 +66,7 @@
 			</Grid.ColumnDefinitions>
 			<Button x:Name="LogoutButton" Width="150" Click="LogoutButton_Click" BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="Resources\logout.png"/>
+					<Image Source="..\Resources\logout.png"/>
 					<Label Content="Logout" Foreground="{StaticResource TextForeground}"/>
 				</StackPanel>
 			</Button>
@@ -76,7 +76,7 @@
 			<Button x:Name="FilterButton" Width="150" Click="FilterButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
 					<Label Content="Filter Automata" Foreground="{StaticResource TextForeground}"/>
-					<Image Source="Resources\filter.png"/>
+					<Image Source="..\Resources\filter.png"/>
 				</StackPanel>
 			</Button>
 		</Grid>
@@ -96,31 +96,31 @@
 				</Grid.RowDefinitions>
 				<Button x:Name="NewButton" Width="150" Click="NewButton_Click" BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\new.png"/>
+						<Image Source="..\Resources\new.png"/>
 						<Label Content="New Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="EditButton" Visibility="Hidden" Width="150" Click="EditButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\edit.png"/>
+						<Image Source="..\Resources\edit.png"/>
 						<Label Content="Edit Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="ToggleButton" Visibility="Hidden" Width="150" Click="ToggleButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\toggle.png"/>
+						<Image Source="..\Resources\toggle.png"/>
 						<Label Content="Toggle Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="DeleteButton" Visibility="Hidden" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\delete.png"/>
+						<Image Source="..\Resources\delete.png"/>
 						<Label Content="Delete Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click" BorderThickness="0" Grid.Row="6" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\help.png"/>
+						<Image Source="..\Resources\help.png"/>
 						<Label Content="Help" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>

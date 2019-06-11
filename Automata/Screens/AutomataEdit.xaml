@@ -21,7 +21,7 @@
 			</Grid.ColumnDefinitions>
 			<Button x:Name="ReturnButton" Width="150" Click="ReturnButton_Click"  BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
-					<Image Source="Resources\back.png"/>
+					<Image Source="..\Resources\back.png"/>
 					<Label Content="Return" Foreground="{StaticResource TextForeground}"/>
 				</StackPanel>
 			</Button>
@@ -29,7 +29,7 @@
 			<Button x:Name="RunButton" Width="150" Click="RunButton_Click" BorderThickness="0" Grid.Column="2" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
 					<Label Content="Run Automata" Foreground="{StaticResource TextForeground}"/>
-					<Image Source="Resources\run.png"/>
+					<Image Source="..\Resources\run.png"/>
 				</StackPanel>
 			</Button>
 		</Grid>
@@ -48,25 +48,25 @@
 				</Grid.RowDefinitions>
 				<Button x:Name="EditButton" Width="150" Click="EditButton_Click"  BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\edit.png"/>
+						<Image Source="..\Resources\edit.png"/>
 						<Label Content="Toggle Edit Mode" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click"  BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\save.png"/>
+						<Image Source="..\Resources\save.png"/>
 						<Label Content="Save Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="DeleteButton" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\delete.png"/>
+						<Image Source="..\Resources\delete.png"/>
 						<Label Content="Delete Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click"  BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
-						<Image Source="Resources\help.png"/>
+						<Image Source="..\Resources\help.png"/>
 						<Label Content="Help" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
