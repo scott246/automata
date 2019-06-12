@@ -118,6 +118,9 @@
     <Compile Include="Dialogs\NewAutomata.xaml.cs">
       <DependentUpon>NewAutomata.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Screens\AutomataMasterWindow.xaml.cs">
+      <DependentUpon>AutomataMasterWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="Dialogs\Message.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -144,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\NewAutomata.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Screens\AutomataMasterWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -13,7 +13,7 @@
 			<ColumnDefinition Width="150"/>
 		</Grid.ColumnDefinitions>
 		<Grid Grid.Column="0">
-			<Label x:Name="PromptText" Content="Dialog Text" HorizontalAlignment="Left" VerticalAlignment="Top" Height="96" Width="230" Foreground="{StaticResource InnerTextForeground}" HorizontalContentAlignment="Left" VerticalContentAlignment="Center"/>
+			<TextBlock Margin="10,10,10,10" x:Name="PromptText" Text="Dialog Text" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" VerticalAlignment="Center" Height="76" Width="230" Foreground="{StaticResource InnerTextForeground}"/>
 		</Grid>
 		<Grid Grid.Column="1">
 			<StackPanel>

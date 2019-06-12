@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
+using System.Windows.Threading;
 using MessageBox = System.Windows.Forms.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
-namespace Automata
+namespace Automata.Screens
 {
 	/// <summary>
 	/// Interaction logic for Window1.xaml
 	/// </summary>
-	public partial class AutomataSelect : Window
+	public partial class AutomataSelect : UserControl
 	{
+		public event EventHandler OnEditMode;
+		public event EventHandler OnClose;
+		readonly Dispatcher d = Dispatcher.CurrentDispatcher;
 		readonly string username = "";
 		List<AutomataData> automataList = new List<AutomataData>();
 		private int selectedRow = -1;
@@ -99,16 +102,18 @@ namespace Automata
 					new Message("Error creating automata (" + result + ").", "Error", false, false).ShowDialog();
 					return;
 				}
-				new AutomataEdit(username, newAutomataName).Show();
-				Close();
+				//new AutomataEdit(username, newAutomataName).Show();
+				//Close();
+				OnEditMode?.Invoke(this, e);
 			}
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
 			TextBlock t = AutomataGrid.Columns[1].GetCellContent(AutomataGrid.Items[selectedRow]) as TextBlock;
-			new AutomataEdit(username, t.Text).Show();
-			Close();
+			//new AutomataEdit(username, t.Text).Show();
+			//Close();
+			OnEditMode?.Invoke(this, e);
 		}
 
 		private void DeleteButton_Click(object sender, RoutedEventArgs e)
@@ -128,7 +133,7 @@ namespace Automata
 					new Message("Error deleting automata (" + result + ").", "Error", false, false).ShowDialog();
 					return;
 				}
-				Dispatcher.BeginInvoke(new Action(() =>
+				d.BeginInvoke(new Action(() =>
 				{
 					AutomataGrid.UnselectAll();
 					PopulateDataGrid();
@@ -159,8 +164,8 @@ namespace Automata
 				//MessageBox.Show("Error changing automata status (" + result + ").", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 				new Message("Error changing automata status (" + result + ").", "Error", false, false).ShowDialog();
 			}
-
-			Dispatcher.BeginInvoke(new Action(() =>
+			
+			d.BeginInvoke(new Action(() =>
 			{
 				AutomataGrid.UnselectAll();
 				AutomataGrid.Items.Refresh();
@@ -170,7 +175,7 @@ namespace Automata
 		private void LogoutButton_Click(object sender, RoutedEventArgs e)
 		{
 			new Login().Show();
-			Close();
+			OnClose?.Invoke(this, e);
 		}
 
 		private void FilterButton_Click(object sender, RoutedEventArgs e)

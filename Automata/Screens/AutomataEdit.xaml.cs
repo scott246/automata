@@ -1,14 +1,16 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Automata
+namespace Automata.Screens
 {
 	/// <summary>
 	/// Interaction logic for AutomataEdit.xaml
 	/// </summary>
-	public partial class AutomataEdit : Window
+	public partial class AutomataEdit : UserControl
 	{
+		public event EventHandler OnReturnToSelect;
 		string username = "";
 		public AutomataEdit(string name, string title)
 		{
@@ -16,10 +18,11 @@ namespace Automata
 			AutomataNameDisplay.Content = title;
 			username = name;
 		}
-
-		private void Button_Click(object sender, RoutedEventArgs e)
+		public AutomataEdit()
 		{
-			
+			InitializeComponent();
+			AutomataNameDisplay.Content = "test-automata";
+			username = "test1";
 		}
 
 		int maxLC = 1;
@@ -44,8 +47,7 @@ namespace Automata
 
 		private void ReturnButton_Click(object sender, RoutedEventArgs e)
 		{
-			new AutomataSelect(username).Show();
-			Close();
+			OnReturnToSelect?.Invoke(this, e);
 		}
 
 		private void RunButton_Click(object sender, RoutedEventArgs e)

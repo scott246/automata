@@ -13,7 +13,6 @@ namespace Automata
 	/// </summary>
 	public partial class Login : Window
 	{
-		AutomataSelect as1;
 		public Login()
 		{
 			InitializeComponent();
@@ -105,8 +104,7 @@ namespace Automata
 
 			if (usersWithCreds.Count > 0)
 			{
-				as1 = new AutomataSelect(username);
-				as1.Show();
+				new Screens.AutomataMasterWindow(username).Show();
 				Close();
 			}
 			else

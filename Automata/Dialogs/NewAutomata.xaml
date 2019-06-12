@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Automata"
         mc:Ignorable="d" SizeToContent="WidthAndHeight"
-		Background="{StaticResource AppBackground}" 
+		Background="{StaticResource SectionBackground}" 
         Title="New Automata" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
 	<Grid>
 		<Grid.RowDefinitions>
@@ -34,7 +34,7 @@
 			<Label x:Name="DescCharRemaining" Content="0" HorizontalAlignment="Left" VerticalAlignment="Center" Width="50" Foreground="{StaticResource TextForeground}" Grid.Column="2"/>
 		</Grid>
 		<Grid Grid.Row="2">
-			<Button x:Name="Create" Width="150" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" HorizontalContentAlignment="Left" Click="Create_Click" IsDefault="True" Background="{StaticResource AppBackground}">
+			<Button x:Name="Create" Width="150" Height="32" HorizontalAlignment="Right" VerticalAlignment="Center" BorderThickness="0" HorizontalContentAlignment="Left" Click="Create_Click" IsDefault="True" Background="{StaticResource SectionBackground}">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="..\Resources\new.png"/>
 					<Label Content="Create Automata" Foreground="{StaticResource TextForeground}"/>

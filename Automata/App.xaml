@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Automata"
 			 xmlns:System="clr-namespace:System;assembly=mscorlib"
-	StartupUri="Screens\AutomataSelect.xaml">
+	StartupUri="Screens\AutomataMasterWindow.xaml">
 	<!-- TODO: change StartupUri to Login.xaml once testing is done-->
     <Application.Resources>
 		<SolidColorBrush x:Key="AppBackground">#333333</SolidColorBrush>

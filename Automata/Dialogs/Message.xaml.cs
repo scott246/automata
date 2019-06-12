@@ -14,7 +14,7 @@ namespace Automata
 		public Message(string prompt, string title, bool cancel, bool no)
 		{
 			InitializeComponent();
-			PromptText.Content = prompt;
+			PromptText.Text = prompt;
 			Title = title;
 			if (!cancel) Cancel.Visibility = Visibility.Hidden;
 			if (!no) No.Visibility = Visibility.Hidden;
