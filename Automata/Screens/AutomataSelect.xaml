@@ -71,7 +71,7 @@
 			</Button>
 			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" Foreground="#FFB0B0B0" Height="32" Margin="0"/>
 			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Column="2"/>
-			<TextBox x:Name="AutomataFilterInput" Grid.Column="3" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
+			<TextBox x:Name="AutomataFilterInput" Background="{StaticResource SectionBackground}" BorderBrush="{StaticResource AppBackground}" Grid.Column="3" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
 			<Button x:Name="FilterButton" Width="150" Click="FilterButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
 					<Label Content="Filter Automata" Foreground="{StaticResource TextForeground}"/>

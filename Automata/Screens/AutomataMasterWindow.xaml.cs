@@ -19,7 +19,8 @@ namespace Automata.Screens
 	/// </summary>
 	public partial class AutomataMasterWindow : Window
 	{
-		bool selectionScreen = true;
+		//TODO: change this back to true (selection screen)
+		bool selectionScreen = false;
 		AutomataSelect asControl = new AutomataSelect();
 		AutomataEdit aeControl = new AutomataEdit();
 		public AutomataMasterWindow()
@@ -38,7 +39,8 @@ namespace Automata.Screens
 			{
 				SwitchScreens();
 			};
-			masterContentControl.Content = asControl;
+			//TODO: change this back to asControl (selection screen)
+			masterContentControl.Content = aeControl;
 		}
 
 		public AutomataMasterWindow(string name)

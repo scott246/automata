@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" ResizeMode="CanResize" WindowStartupLocation="CenterScreen"
         Title="Automata" Height="450" Width="800">
-    <Grid>
+    <Grid Background="{StaticResource AppBackground}">
 		<ContentControl x:Name="masterContentControl"/>
 	</Grid>
 </Window>

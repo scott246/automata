@@ -16,21 +16,15 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="150"/>
 			</Grid.ColumnDefinitions>
-			<Button x:Name="ReturnButton" Width="150" Click="ReturnButton_Click"  BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+			<Button x:Name="ReturnButton" Width="150" Click="ReturnButton_Click" BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
 					<Image Source="..\Resources\back.png"/>
 					<Label Content="Return" Foreground="{StaticResource TextForeground}"/>
 				</StackPanel>
 			</Button>
-			<Label x:Name="AutomataNameDisplay" Content="Get automata name failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" Foreground="#FFB0B0B0" Height="32" Margin="0"/>
-			<Button x:Name="RunButton" Width="150" Click="RunButton_Click" BorderThickness="0" Grid.Column="2" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Run Automata" Foreground="{StaticResource TextForeground}"/>
-					<Image Source="..\Resources\run.png"/>
-				</StackPanel>
-			</Button>
+			<TextBox x:Name="AutomataNameDisplay" Text="Get automata name failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" BorderBrush="{StaticResource AppBackground}" Background="{StaticResource AppBackground}" Foreground="{StaticResource TextForeground}" Height="32" Margin="0" KeyUp="AutomataNameDisplay_KeyUp"/>
+			<Label x:Name="Status" Content="Saved" Grid.Column="1" FontSize="14" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource TextForeground}"/>
 		</Grid>
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -45,22 +39,22 @@
 					<RowDefinition Height="*"/>
 					<RowDefinition Height="32"/>
 				</Grid.RowDefinitions>
-				<Button x:Name="EditButton" Width="150" Click="EditButton_Click"  BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+				<Button x:Name="EditButton" Width="150" Click="EditButton_Click" BorderThickness="0" Grid.Row="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\edit.png"/>
-						<Label Content="Toggle Edit Mode" Foreground="{StaticResource TextForeground}"/>
+						<Label Content="Edit Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click"  BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+				<Button x:Name="RunButton" Width="150" Click="RunButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="..\Resources\run.png"/>
+						<Label Content="Run Automata" Foreground="{StaticResource TextForeground}"/>
+					</StackPanel>
+				</Button>
+				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click"  BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\save.png"/>
 						<Label Content="Save Automata" Foreground="{StaticResource TextForeground}"/>
-					</StackPanel>
-				</Button>
-				<Button x:Name="DeleteButton" Width="150" Click="DeleteButton_Click" BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
-					<StackPanel Orientation="Horizontal">
-						<Image Source="..\Resources\delete.png"/>
-						<Label Content="Delete Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
 				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click"  BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
@@ -76,21 +70,14 @@
 					<RowDefinition Height="5"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
-				<TabControl Background="{StaticResource AppBackground}" Grid.Row="0" TabStripPlacement="Top">
-					<TabItem Header="Visual">
-						
-					</TabItem>
-					<TabItem Header="Code">
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="30"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBox x:Name="LineNumberTextBox" IsReadOnly="True" Text="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#222222" Foreground="{StaticResource TitleForeground}" FontFamily="Global Monospace"/>
-							<TextBox x:Name="ScriptTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Foreground="{StaticResource InnerTextForeground}" Background="#222222" FontFamily="Global Monospace" AcceptsReturn="True" AcceptsTab="True" KeyUp="Script_textbox_KeyUp" TextWrapping="Wrap"/>
-						</Grid>
-					</TabItem>
-				</TabControl>
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="30"/>
+						<ColumnDefinition Width="*"/>
+					</Grid.ColumnDefinitions>
+					<TextBox x:Name="LineNumberTextBox" IsReadOnly="True" Text="1" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#222222" Foreground="{StaticResource TitleForeground}" FontFamily="Global Monospace"/>
+					<TextBox x:Name="ScriptTextBox" Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Foreground="{StaticResource InnerTextForeground}" Background="#222222" FontFamily="Global Monospace" AcceptsReturn="True" AcceptsTab="True" KeyUp="Script_textbox_KeyUp" TextWrapping="Wrap"/>
+				</Grid>
 				<GridSplitter Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="{StaticResource SectionBackground}" ResizeDirection="Rows" Height="5"/>
 				<Grid Grid.Row="2">
 					<TextBox HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="Output" VerticalAlignment="Stretch" Foreground="{StaticResource InnerTextForeground}" Background="Black" FontFamily="Global Monospace" IsReadOnly="True"/>

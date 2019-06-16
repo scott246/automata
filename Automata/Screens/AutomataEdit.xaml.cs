@@ -1,7 +1,12 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace Automata.Screens
 {
@@ -10,24 +15,28 @@ namespace Automata.Screens
 	/// </summary>
 	public partial class AutomataEdit : UserControl
 	{
+		public string script = "";
 		public event EventHandler OnReturnToSelect;
 		string username = "";
 		public AutomataEdit(string name, string title)
 		{
 			InitializeComponent();
-			AutomataNameDisplay.Content = title;
+			AutomataNameDisplay.Text = title;
 			username = name;
 		}
+
+		//TODO: remove after testing edit screen
 		public AutomataEdit()
 		{
 			InitializeComponent();
-			AutomataNameDisplay.Content = "test-automata";
+			AutomataNameDisplay.Text = "test-automata";
 			username = "test1";
 		}
 
 		int maxLC = 1;
 		private void Script_textbox_KeyUp(object sender, KeyEventArgs e)
 		{
+			script = ScriptTextBox.Text;
 			int linecount = ScriptTextBox.GetLastVisibleLineIndex() + 1;
 			if (linecount != maxLC)
 			{
@@ -38,11 +47,7 @@ namespace Automata.Screens
 				}
 				maxLC = linecount;
 			}
-		}
-
-		private void Help_Clicked(object sender, RoutedEventArgs e)
-		{
-			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
+			Status.Content = "Changed";
 		}
 
 		private void ReturnButton_Click(object sender, RoutedEventArgs e)
@@ -62,17 +67,19 @@ namespace Automata.Screens
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
-
-		}
-
-		private void DeleteButton_Click(object sender, RoutedEventArgs e)
-		{
-
+			//save the automata and name
+			Status.Content = "Saved";
 		}
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
+			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
+		}
 
+		private void AutomataNameDisplay_KeyUp(object sender, KeyEventArgs e)
+		{
+			Console.WriteLine("name changed to " + AutomataNameDisplay.Text);
+			Status.Content = "Changed";
 		}
 	}
 }
