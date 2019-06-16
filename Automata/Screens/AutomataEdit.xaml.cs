@@ -73,7 +73,8 @@ namespace Automata.Screens
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
-			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
+			new Help().ShowDialog();
+			//System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
 		}
 
 		private void AutomataNameDisplay_KeyUp(object sender, KeyEventArgs e)
