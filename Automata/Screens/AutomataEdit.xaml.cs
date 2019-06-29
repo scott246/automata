@@ -57,7 +57,7 @@ namespace Automata.Screens
 
 		private void RunButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			//show stop button, run automata, disable code box
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
@@ -74,13 +74,17 @@ namespace Automata.Screens
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
 			new Help().ShowDialog();
-			//System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
 		}
 
 		private void AutomataNameDisplay_KeyUp(object sender, KeyEventArgs e)
 		{
 			Console.WriteLine("name changed to " + AutomataNameDisplay.Text);
 			Status.Content = "Changed";
+		}
+
+		private void StopButton_Click(object sender, RoutedEventArgs e)
+		{
+			//show run button, terminate running automata
 		}
 	}
 }

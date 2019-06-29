@@ -59,9 +59,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="150"/>
 				<ColumnDefinition Width="*"/>
-				<ColumnDefinition Width="100"/>
-				<ColumnDefinition Width="150"/>
-				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="182"/>
 			</Grid.ColumnDefinitions>
 			<Button x:Name="LogoutButton" Width="150" Click="LogoutButton_Click" BorderThickness="0" Grid.Column="0" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 				<StackPanel Orientation="Horizontal">
@@ -70,14 +68,10 @@
 				</StackPanel>
 			</Button>
 			<Label x:Name="UsernameDisplay" Content="Get username failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" Foreground="#FFB0B0B0" Height="32" Margin="0"/>
-			<Label x:Name="AutomataFilterCount" Content="" Visibility="Hidden" Foreground="#FFB0B0B0" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right" Grid.Column="2"/>
-			<TextBox x:Name="AutomataFilterInput" Background="{StaticResource SectionBackground}" BorderBrush="{StaticResource AppBackground}" Grid.Column="3" Text="" Height="23" Visibility="Hidden" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
-			<Button x:Name="FilterButton" Width="150" Click="FilterButton_Click" BorderThickness="0" Grid.Column="4" HorizontalContentAlignment="Right" Background="{StaticResource AppBackground}">
-				<StackPanel Orientation="Horizontal">
-					<Label Content="Filter Automata" Foreground="{StaticResource TextForeground}"/>
-					<Image Source="..\Resources\filter.png"/>
-				</StackPanel>
-			</Button>
+			<StackPanel Orientation="Horizontal" Grid.Column="2" Background="{StaticResource SectionBackground}">
+				<Image Source="..\Resources\filter.png"/>
+				<TextBox x:Name="AutomataFilterInput" Background="{StaticResource SectionBackground}" BorderBrush="{StaticResource SectionBackground}" Grid.Column="3" Text="" Foreground="{StaticResource InnerTextForeground}" Height="32" Width="150" VerticalContentAlignment="Center" TextChanged="AutomataFilterInput_TextChanged"/>
+			</StackPanel>
 		</Grid>
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -124,28 +118,35 @@
 					</StackPanel>
 				</Button>
 			</Grid>
-			<DataGrid x:Name="AutomataGrid" Background="{StaticResource AppBackground}" RowBackground="{StaticResource SectionBackground}" Foreground="{StaticResource InnerTextForeground}" Grid.Column="1"
-				  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" CanUserSortColumns="False"
-				  CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
-				  IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
-				<DataGrid.Columns>
-					<DataGridTemplateColumn Header="Enabled" Width="*">
-						<DataGridTemplateColumn.CellTemplate>
-							<DataTemplate>
-								<CheckBox 
-								x:Name="EnabledCheckBox" 
-								HorizontalAlignment="Center" 
-								IsChecked="{Binding Enabled}"
-								Style="{DynamicResource CustomCheckBox}"/>
-							</DataTemplate>
-						</DataGridTemplateColumn.CellTemplate>
-					</DataGridTemplateColumn>
-					<DataGridTextColumn Header="Name" Width="3*" Binding="{Binding Name}"/>
-					<DataGridTextColumn Header="Description" Width="5*" Binding="{Binding Description}"/>
-					<DataGridTextColumn Header="Created" Width="3*" Binding="{Binding CreatedTime}"/>
-					<DataGridTextColumn Header="Last Updated" Width="3*" Binding="{Binding UpdatedTime}"/>
-				</DataGrid.Columns>
-			</DataGrid>
+			<Grid Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="16"/>
+				</Grid.RowDefinitions>
+				<DataGrid x:Name="AutomataGrid" Background="{StaticResource AppBackground}" RowBackground="{StaticResource SectionBackground}" Foreground="{StaticResource InnerTextForeground}" Grid.Row="0"
+					  HeadersVisibility="Column" Style="{DynamicResource DGStyle}" AutoGenerateColumns="False" CanUserSortColumns="False"
+					  CanUserResizeColumns="True" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False"
+					  IsReadOnly="True" SelectionMode="Single" SelectionUnit="FullRow">
+					<DataGrid.Columns>
+						<DataGridTemplateColumn Header="Enabled" Width="*">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<CheckBox 
+									x:Name="EnabledCheckBox" 
+									HorizontalAlignment="Center" 
+									IsChecked="{Binding Enabled}"
+									Style="{DynamicResource CustomCheckBox}"/>
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+						<DataGridTextColumn Header="Name" Width="3*" Binding="{Binding Name}"/>
+						<DataGridTextColumn Header="Description" Width="5*" Binding="{Binding Description}"/>
+						<DataGridTextColumn Header="Created" Width="3*" Binding="{Binding CreatedTime}"/>
+						<DataGridTextColumn Header="Last Updated" Width="3*" Binding="{Binding UpdatedTime}"/>
+					</DataGrid.Columns>
+				</DataGrid>
+				<Label x:Name="AutomataFilterCount" Content="" Height="16" Grid.Row="1" Padding="0" Foreground="#FFB0B0B0" VerticalAlignment="Center" HorizontalAlignment="Right" HorizontalContentAlignment="Right"/>
+			</Grid>
 		</Grid>
 	</Grid>
 </UserControl>

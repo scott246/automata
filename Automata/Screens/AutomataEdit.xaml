@@ -51,6 +51,12 @@
 						<Label Content="Run Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
+				<Button x:Name="StopButton" Width="150" Click="StopButton_Click" BorderThickness="0" Grid.Row="1" Visibility="Hidden" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+					<StackPanel Orientation="Horizontal">
+						<Image Source="..\Resources\pause.png"/>
+						<Label Content="Stop Automata" Foreground="{StaticResource TextForeground}"/>
+					</StackPanel>
+				</Button>
 				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click"  BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\save.png"/>

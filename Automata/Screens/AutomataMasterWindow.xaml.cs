@@ -40,7 +40,7 @@ namespace Automata.Screens
 				SwitchScreens();
 			};
 			//TODO: change this back to asControl (selection screen)
-			masterContentControl.Content = aeControl;
+			masterContentControl.Content = asControl;
 		}
 
 		public AutomataMasterWindow(string name)

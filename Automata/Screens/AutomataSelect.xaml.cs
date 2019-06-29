@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
-using MessageBox = System.Windows.Forms.MessageBox;
 using TextBox = System.Windows.Controls.TextBox;
 
 namespace Automata.Screens
@@ -58,6 +57,7 @@ namespace Automata.Screens
 				});
 			}
 			AutomataGrid.ItemsSource = automataList;
+			AutomataFilterCount.Content = AutomataGrid.Items.Count + " found";
 		}
 
 		void OnRowSelect(object sender, RoutedEventArgs e)
@@ -178,25 +178,6 @@ namespace Automata.Screens
 			OnClose?.Invoke(this, e);
 		}
 
-		private void FilterButton_Click(object sender, RoutedEventArgs e)
-		{
-			if (AutomataFilterInput.Visibility == Visibility.Hidden)
-			{
-				AutomataFilterInput.Visibility = Visibility.Visible;
-				AutomataFilterCount.Visibility = Visibility.Visible;
-				AutomataFilterCount.Content = AutomataGrid.Items.Count + " found";
-				AutomataFilterInput.SelectAll();
-				AutomataFilterInput.Focus();
-			}
-			else
-			{
-				AutomataFilterInput.Visibility = Visibility.Hidden;
-				AutomataFilterCount.Visibility = Visibility.Hidden;
-				AutomataFilterInput.Text = "";
-				AutomataFilterCount.Content = "";
-			}
-		}
-
 		private void AutomataFilterInput_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			TextBox tb = (TextBox)e.Source;
@@ -226,7 +207,7 @@ namespace Automata.Screens
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
 		{
-			System.Diagnostics.Process.Start("https://github.com/scott246/automata/wiki");
+			new Help().ShowDialog();
 		}
 	}
 

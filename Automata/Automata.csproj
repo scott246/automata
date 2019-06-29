@@ -251,9 +251,7 @@
     <Resource Include="Resources\cancel.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Screens\HelpContent\HelpMain.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Resource Include="Resources\pause.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

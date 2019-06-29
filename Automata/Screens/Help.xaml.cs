@@ -23,8 +23,7 @@ namespace Automata.Screens
 		public Help()
 		{
 			InitializeComponent();
-			string curDir = Directory.GetCurrentDirectory();
-			browser.Navigate(new Uri(String.Format("file:///{0}/screens/helpcontent/helpmain.html", curDir)));
+			SearchBox.Focus();
 		}
 	}
 }
