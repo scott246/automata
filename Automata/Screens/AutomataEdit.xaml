@@ -24,7 +24,7 @@
 				</StackPanel>
 			</Button>
 			<TextBox x:Name="AutomataNameDisplay" Text="Get automata name failed." Grid.Column="1" FontSize="20" HorizontalAlignment="Left" HorizontalContentAlignment="Left" VerticalAlignment="Center" BorderBrush="{StaticResource AppBackground}" Background="{StaticResource AppBackground}" Foreground="{StaticResource TextForeground}" Height="32" Margin="0" KeyUp="AutomataNameDisplay_KeyUp"/>
-			<Label x:Name="Status" Content="Saved" Grid.Column="1" FontSize="14" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource TextForeground}"/>
+			<Label x:Name="EnabledStatus" Content="Enabled" Grid.Column="1" FontSize="14" HorizontalAlignment="Right" HorizontalContentAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource TextForeground}"/>
 		</Grid>
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -33,7 +33,6 @@
 			</Grid.ColumnDefinitions>
 			<Grid Grid.Column="0">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="32"/>
 					<RowDefinition Height="32"/>
 					<RowDefinition Height="32"/>
 					<RowDefinition Height="*"/>
@@ -45,25 +44,19 @@
 						<Label Content="Edit Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="RunButton" Width="150" Click="RunButton_Click" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+				<Button x:Name="RunButton" Width="150" Click="RunButton_Click" BorderThickness="0" Grid.Row="0" Visibility="Hidden" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\run.png"/>
 						<Label Content="Run Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="StopButton" Width="150" Click="StopButton_Click" BorderThickness="0" Grid.Row="1" Visibility="Hidden" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
-					<StackPanel Orientation="Horizontal">
-						<Image Source="..\Resources\pause.png"/>
-						<Label Content="Stop Automata" Foreground="{StaticResource TextForeground}"/>
-					</StackPanel>
-				</Button>
-				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click"  BorderThickness="0" Grid.Row="2" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+				<Button x:Name="SaveButton" Width="150" Click="SaveButton_Click" Visibility="Hidden" BorderThickness="0" Grid.Row="1" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\save.png"/>
 						<Label Content="Save Automata" Foreground="{StaticResource TextForeground}"/>
 					</StackPanel>
 				</Button>
-				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click"  BorderThickness="0" Grid.Row="4" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
+				<Button x:Name="HelpButton" Width="150" Click="HelpButton_Click"  BorderThickness="0" Grid.Row="3" HorizontalContentAlignment="Left" Background="{StaticResource AppBackground}">
 					<StackPanel Orientation="Horizontal">
 						<Image Source="..\Resources\help.png"/>
 						<Label Content="Help" Foreground="{StaticResource TextForeground}"/>
@@ -75,6 +68,7 @@
 					<RowDefinition Height="3*"/>
 					<RowDefinition Height="5"/>
 					<RowDefinition Height="*"/>
+					<RowDefinition Height="23"/>
 				</Grid.RowDefinitions>
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -88,6 +82,7 @@
 				<Grid Grid.Row="2">
 					<TextBox HorizontalAlignment="Stretch" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" Text="Output" VerticalAlignment="Stretch" Foreground="{StaticResource InnerTextForeground}" Background="Black" FontFamily="Global Monospace" IsReadOnly="True"/>
 				</Grid>
+				<Label x:Name="SaveStatus" Content="Saved" HorizontalContentAlignment="Right" Grid.Row="3" Foreground="{StaticResource TextForeground}" VerticalAlignment="Top" FontSize="10"/>
 			</Grid>
 		</Grid>
 	</Grid>

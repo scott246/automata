@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 
 namespace Automata.Screens
 {
@@ -17,12 +12,23 @@ namespace Automata.Screens
 	{
 		public string script = "";
 		public event EventHandler OnReturnToSelect;
-		string username = "";
-		public AutomataEdit(string name, string title)
+		public bool enabled = true;
+
+		public AutomataEdit(string title, bool isEnabled)
 		{
 			InitializeComponent();
 			AutomataNameDisplay.Text = title;
-			username = name;
+			enabled = isEnabled;
+			SaveStatus.Content = "Saved";
+			EnabledStatus.Content = stringEnabled(isEnabled);
+			if (isEnabled)
+			{
+				Run();
+			}
+			else
+			{
+				Stop();
+			}
 		}
 
 		//TODO: remove after testing edit screen
@@ -30,7 +36,46 @@ namespace Automata.Screens
 		{
 			InitializeComponent();
 			AutomataNameDisplay.Text = "test-automata";
-			username = "test1";
+			enabled = true;
+			SaveStatus.Content = "Saved";
+			EnabledStatus.Content = stringEnabled(true);
+		}
+
+		public string stringEnabled(bool isEnabled)
+		{
+			return isEnabled == true ? "Enabled" : "Disabled";
+		}
+
+		public void Run()
+		{
+			Message m = new Message("This will enable the automata. Are you sure?", "Running", false, true);
+			m.ShowDialog();
+			int response = m.response;
+			if (response == 1)
+			{
+				ScriptTextBox.IsEnabled = false;
+				EnabledStatus.Content = stringEnabled(true);
+				//update database, run automata
+				RunButton.Visibility = Visibility.Hidden;
+				EditButton.Visibility = Visibility.Visible;
+				SaveButton.Visibility = Visibility.Hidden;
+			}
+		}
+
+		public void Stop()
+		{
+			Message m = new Message("This will disable the automata. Are you sure?", "Editing", false, true);
+			m.ShowDialog();
+			int response = m.response;
+			if (response == 1)
+			{
+				ScriptTextBox.IsEnabled = true;
+				EnabledStatus.Content = stringEnabled(false);
+				//update database, stop automata
+				RunButton.Visibility = Visibility.Visible;
+				EditButton.Visibility = Visibility.Hidden;
+				SaveButton.Visibility = Visibility.Visible;
+			}
 		}
 
 		int maxLC = 1;
@@ -47,7 +92,7 @@ namespace Automata.Screens
 				}
 				maxLC = linecount;
 			}
-			Status.Content = "Changed";
+			SaveStatus.Content = "Changed";
 		}
 
 		private void ReturnButton_Click(object sender, RoutedEventArgs e)
@@ -58,17 +103,18 @@ namespace Automata.Screens
 		private void RunButton_Click(object sender, RoutedEventArgs e)
 		{
 			//show stop button, run automata, disable code box
+			Run();
 		}
 
 		private void EditButton_Click(object sender, RoutedEventArgs e)
 		{
-
+			Stop();
 		}
 
 		private void SaveButton_Click(object sender, RoutedEventArgs e)
 		{
 			//save the automata and name
-			Status.Content = "Saved";
+			SaveStatus.Content = "Saved";
 		}
 
 		private void HelpButton_Click(object sender, RoutedEventArgs e)
@@ -78,13 +124,7 @@ namespace Automata.Screens
 
 		private void AutomataNameDisplay_KeyUp(object sender, KeyEventArgs e)
 		{
-			Console.WriteLine("name changed to " + AutomataNameDisplay.Text);
-			Status.Content = "Changed";
-		}
-
-		private void StopButton_Click(object sender, RoutedEventArgs e)
-		{
-			//show run button, terminate running automata
+			SaveStatus.Content = "Changed";
 		}
 	}
 }
